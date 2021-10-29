@@ -10,18 +10,10 @@ export const GlobalStyle = createGlobalStyle`
         --transition: all 0.3s linear;
     }
 
-    ::after,
+    *, ::after,
     ::before {
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-    }
-
-    ul {
-        list-style-type: none;
-    }
-
-    * {
         box-sizing: border-box;
     }
 

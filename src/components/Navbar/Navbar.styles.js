@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
 	nav {
 		background: #00abff;
 		margin: 0 auto;
+		box-shadow: 0 3px 7px grey;
 	}
 
 	.nav-center {
@@ -13,9 +14,9 @@ export const Wrapper = styled.div`
 
 	.nav-header {
 		display: flex;
-
 		align-items: center;
 		justify-content: space-between;
+		padding: 1rem 0;
 	}
 
 	.nav-toggle {
@@ -32,18 +33,30 @@ export const Wrapper = styled.div`
 		transform: rotate(90deg);
 	}
 
+	ul {
+		list-style-type: none;
+	}
+
+	.links-container {
+		height: 0;
+		overflow: hidden;
+		transition: var(--transition);
+	}
+
 	.links a {
 		color: white;
 		text-transform: capitalize;
 		text-decoration: none;
 		display: block;
-		padding: 0 0.5rem 1rem;
 		align-items: center;
+		padding: 0 0.5rem 1.25rem;
 		transition: var(--transition);
 	}
 
 	.links a:hover {
 		color: #0000ff;
+		background: hsl(205, 86%, 81%);
+		padding-left: 1.5rem;
 	}
 
 	@media screen and (min-width: 800px) {
@@ -71,6 +84,11 @@ export const Wrapper = styled.div`
 		.links a {
 			padding: 0;
 			margin: 0 1rem;
+		}
+		.links a:hover {
+			padding: 0;
+			margin: 0 1rem;
+			background: none;
 		}
 	}
 `;
