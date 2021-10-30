@@ -12,5 +12,8 @@ export const FormContainer = styled.div`
 	box-shadow: 3px 3px 7px grey;
 	padding: 1rem;
 	margin: 3rem auto;
-	max-width: 60%;
+
+	@media screen and (min-width: 800px) {
+		max-width: 60%;
+	}
 `;
