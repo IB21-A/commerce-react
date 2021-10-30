@@ -11,9 +11,20 @@ const Register = () => {
 		email: "",
 		username: "",
 		password: "",
-		repeatPassword: "",
+		password_repeat: "",
 	});
 	const [error, setError] = useState({});
+
+	const handleChange = ({ currentTarget: input }) => {
+		let newData = { ...data };
+		newData[input.name] = input.value;
+		setData(newData);
+	};
+
+	const doSubmit = (e) => {
+		e.preventDefault();
+		console.log(data);
+	};
 
 	return (
 		<>
@@ -25,7 +36,13 @@ const Register = () => {
 								controlId="floatingInput"
 								label="Email address"
 								className="mb-3 text-muted">
-								<Form.Control type="email" placeholder="Enter email" />
+								<Form.Control
+									name="email"
+									type="email"
+									value={data.email}
+									placeholder="Enter email"
+									onChange={(e) => handleChange(e)}
+								/>
 							</FloatingLabel>
 						</Form.Group>
 
@@ -34,7 +51,13 @@ const Register = () => {
 								controlId="floatingInput"
 								label="Username"
 								className="mb-3 text-muted">
-								<Form.Control type="text" placeholder="Enter email" />
+								<Form.Control
+									name="username"
+									value={data.username}
+									type="text"
+									placeholder="Enter email"
+									onChange={(e) => handleChange(e)}
+								/>
 							</FloatingLabel>
 						</Form.Group>
 
@@ -43,7 +66,13 @@ const Register = () => {
 								controlId="floatingPassword"
 								label="Password"
 								className="mb-3 text-muted">
-								<Form.Control type="password" placeholder="Password" />
+								<Form.Control
+									name="password"
+									value={data.password}
+									type="password"
+									placeholder="Password"
+									onChange={(e) => handleChange(e)}
+								/>
 							</FloatingLabel>
 						</Form.Group>
 
@@ -52,11 +81,20 @@ const Register = () => {
 								controlId="floatingRepeatPassword"
 								label="Repeat Password"
 								className="mb-3 text-muted">
-								<Form.Control type="password" placeholder="Password" />
+								<Form.Control
+									name="password_repeat"
+									value={data.password_repeat}
+									type="password"
+									placeholder="Password"
+									onChange={(e) => handleChange(e)}
+								/>
 							</FloatingLabel>
 						</Form.Group>
 
-						<Button variant="primary" type="submit">
+						<Button
+							variant="primary"
+							type="submit"
+							onClick={(e) => doSubmit(e)}>
 							Submit
 						</Button>
 					</Form>

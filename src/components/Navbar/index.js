@@ -31,13 +31,13 @@ const Navbar = () => {
 					</div>
 					<div className="links-container" ref={linksContainerRef}>
 						<ul className="links" ref={linksRef}>
-							<a href="#">
+							<a href="/">
 								<li>Home</li>
 							</a>
-							<a href="#">
+							<a href="/">
 								<li>About</li>
 							</a>
-							<a href="#">
+							<a href="/">
 								<li>Contact</li>
 							</a>
 
