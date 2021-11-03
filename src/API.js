@@ -51,12 +51,16 @@ const apiSettings = {
 			return { error: "Something went wrong!" };
 		}
 	},
-	getCurrentUser: async () => {
+	getCurrentUsername: async () => {
 		try {
 			let jwt = await jwtDecode(localStorage.getItem("access_token"));
-			console.log("current user:" + jwt.username);
-			return jwt.username; // return username
-		} catch (ex) {}
+			const formattedUsername =
+				jwt.username.charAt(0).toUpperCase() +
+				jwt.username.slice(1).toLowerCase();
+			return formattedUsername; // return username
+		} catch (ex) {
+			return "";
+		}
 	},
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import jwtDecode from "jwt-decode";
 
 import API from "../API";
+import { useNavigate } from "react-router-dom";
 
 const authContext = createContext();
 
@@ -18,21 +19,24 @@ export const useAuth = () => {
 // provider hook that creates auth object and handles state
 export function useProvideAuth() {
 	const [user, setUser] = useState(null);
+	const navigate = useNavigate();
 
 	// provide data.username and data.password
 	const login = async (data) => {
 		const user = await API.login(data);
 		setUser(user);
+		navigate("/home");
 		return user;
 	};
 
 	const logout = async () => {
 		setUser(null);
-		API.logout();
+		await API.logout();
+		navigate("/login");
 	};
 
-	const getUser = async () => {
-		return await API.getCurrentUser();
+	const getUsername = async () => {
+		return await API.getCurrentUsername();
 	};
 
 	// Subscribe to user on mount
@@ -55,5 +59,5 @@ export function useProvideAuth() {
 		// Cleanup subscription on unmount
 	}, []);
 
-	return { user, login, logout, getUser };
+	return { user, login, logout, getUsername };
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import API from "../../API";
 
@@ -23,6 +24,7 @@ const Login = () => {
 	const [errors, setErrors] = useState({});
 	const [loading, setLoading] = useState(false);
 	const auth = useAuth();
+	const navigate = useNavigate();
 
 	const schema = Joi.object({
 		username: Joi.string().alphanum().min(3).max(30).required(),
@@ -66,6 +68,9 @@ const Login = () => {
 				setErrors(newErrors);
 			}
 			setLoading(false);
+			if (user.username) {
+				return true;
+			}
 		} catch (e) {
 			console.log(e);
 			setLoading(false);
@@ -75,7 +80,10 @@ const Login = () => {
 	const doSubmit = async (e) => {
 		e.preventDefault();
 		await validate();
-		await attemptLogin();
+		const loggedIn = await attemptLogin();
+		if (loggedIn) {
+			navigate("/home");
+		}
 	};
 
 	return (
