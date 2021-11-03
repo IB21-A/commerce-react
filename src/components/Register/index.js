@@ -56,7 +56,6 @@ const Register = () => {
 				newErrors[item.path] = item.message;
 			});
 			setErrors(newErrors);
-			console.log(newErrors);
 			return;
 		}
 		try {
@@ -77,6 +76,7 @@ const Register = () => {
 		<>
 			<Wrapper>
 				<FormContainer>
+					<h1>Register</h1>
 					<Form>
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<FloatingLabel

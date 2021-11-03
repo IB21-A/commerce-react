@@ -32,17 +32,17 @@ const Navbar = () => {
 					<div className="links-container" ref={linksContainerRef}>
 						<ul className="links" ref={linksRef}>
 							<a href="/">
-								<li>Home</li>
+								<li>Searchbar</li>
 							</a>
 							<a href="/">
-								<li>About</li>
-							</a>
-							<a href="/">
-								<li>Contact</li>
+								<li>Profile</li>
 							</a>
 
 							<a href="/register">
-								<li>Register / Login</li>
+								<li>Register</li>
+							</a>
+							<a href="/login">
+								<li>Login</li>
 							</a>
 						</ul>
 					</div>
