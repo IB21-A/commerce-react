@@ -38,7 +38,6 @@ const apiSettings = {
 			return user;
 		} catch (ex) {
 			if (ex.response) {
-				apiSettings.logout();
 				return ex.response.data;
 			}
 		}
