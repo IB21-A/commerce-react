@@ -115,7 +115,7 @@ const Login = () => {
 									onChange={(e) => handleChange(e)}
 								/>
 							</FloatingLabel>
-							{errors.username && (
+							{errors.password && (
 								<div className="alert alert-danger">{errors.password}</div>
 							)}
 						</Form.Group>
