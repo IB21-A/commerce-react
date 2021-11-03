@@ -3,10 +3,15 @@ import { Wrapper } from "./Navbar.styles";
 
 import { FaBars } from "react-icons/fa";
 
+// Hooks
+import { useAuth } from "../../hooks/useAuth";
+
 const Navbar = () => {
 	const [showLinks, setShowLinks] = useState(false);
 	const linksContainerRef = useRef(null);
 	const linksRef = useRef(null);
+	const auth = useAuth();
+	const user = auth.user;
 
 	useEffect(() => {
 		const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -30,12 +35,9 @@ const Navbar = () => {
 						</button>
 					</div>
 					<div className="links-container" ref={linksContainerRef}>
-						<ul className="links" ref={linksRef}>
+					{!user && <ul className="links" ref={linksRef}>
 							<a href="/">
 								<li>Searchbar</li>
-							</a>
-							<a href="/">
-								<li>Profile</li>
 							</a>
 
 							<a href="/register">
@@ -44,7 +46,18 @@ const Navbar = () => {
 							<a href="/login">
 								<li>Login</li>
 							</a>
-						</ul>
+						</ul>}
+					{user && <ul className="links" ref={linksRef}>
+							<a href="/">
+								<li>Searchbar</li>
+							</a>
+							<a href="/profile">
+								<li>{user.username}</li>
+							</a>
+							<a href="/logout">
+								<li>Logout</li>
+							</a>
+						</ul>}
 					</div>
 				</div>
 			</nav>

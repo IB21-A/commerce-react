@@ -12,17 +12,20 @@ import { GlobalStyle } from "./globalstyle";
 
 // Hooks
 import { createBrowserHistory } from "history";
+import { ProvideAuth } from "./hooks/useAuth";
 
 function App() {
 	const history = createBrowserHistory();
 
 	return (
 		<Router history={history}>
-			<Navbar />
-			<Routes>
-				<Route exact path="/register" element={<Register />} />
-				<Route exact path="/login" element={<Login />} />
-			</Routes>
+			<ProvideAuth>
+				<Navbar />
+				<Routes>
+					<Route exact path="/register" element={<Register />} />
+					<Route exact path="/login" element={<Login />} />
+				</Routes>
+			</ProvideAuth>
 			<GlobalStyle />
 		</Router>
 	);

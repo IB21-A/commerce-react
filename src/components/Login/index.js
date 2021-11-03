@@ -13,6 +13,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 // Validation
 import Joi from "joi";
+import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
 	const [data, setData] = useState({
@@ -21,6 +22,7 @@ const Login = () => {
 	});
 	const [errors, setErrors] = useState({});
 	const [loading, setLoading] = useState(false);
+	const auth = useAuth();
 
 	const schema = Joi.object({
 		username: Joi.string().alphanum().min(3).max(30).required(),
@@ -53,13 +55,14 @@ const Login = () => {
 	};
 
 	const attemptLogin = async () => {
+		console.log("attempt login data:", data);
 		try {
 			setLoading(true);
-			const result = await API.login(data);
+			const user = await auth.login(data);
 			let newErrors = {};
-			console.log(result);
-			if (result.detail) {
-				newErrors.general = result.detail;
+			console.log(user);
+			if (user.detail) {
+				newErrors.login_error = user.detail;
 				setErrors(newErrors);
 			}
 			setLoading(false);
@@ -81,8 +84,8 @@ const Login = () => {
 				<FormContainer>
 					<h1>Login</h1>
 					<Form>
-						{errors.general && (
-							<div className="alert alert-danger">{errors.general}</div>
+						{errors.login_error && (
+							<div className="alert alert-danger">{errors.login_error}</div>
 						)}
 						<Form.Group className="mb-3" controlId="formUsername">
 							<FloatingLabel

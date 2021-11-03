@@ -34,14 +34,30 @@ const apiSettings = {
 			localStorage.setItem("refresh_token", res.data.refresh);
 			axiosInstance.defaults.headers["Authorization"] =
 				"JWT " + localStorage.getItem("access_token");
-			let user = jwtDecode(res.data.access);
-			console.log("User:", user);
+			let user = jwtDecode(res.data.access); // Decode the token and get user payload data
 			return user;
 		} catch (ex) {
 			if (ex.response) {
+				apiSettings.logout();
 				return ex.response.data;
 			}
 		}
+	},
+	logout: async () => {
+		try {
+			localStorage.removeItem("access_token");
+			localStorage.removeItem("refresh_token");
+			window.location.href = "/login";
+		} catch (ex) {
+			return { error: "Something went wrong!" };
+		}
+	},
+	getCurrentUser: async () => {
+		try {
+			let jwt = await jwtDecode(localStorage.getItem("access_token"));
+			console.log("current user:" + jwt.username);
+			return jwt.username; // return username
+		} catch (ex) {}
 	},
 };
 
