@@ -62,6 +62,15 @@ const apiSettings = {
 			return "";
 		}
 	},
+	getActiveAuctions: async () => {
+		try {
+			let auctions = await axiosInstance.get(`listings/`);
+			// console.log(auctions.data);
+			return auctions;
+		} catch (ex) {
+			return ex;
+		}
+	},
 };
 
 export default apiSettings;

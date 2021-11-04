@@ -57,6 +57,7 @@ export function useProvideAuth() {
 		}
 
 		// Cleanup subscription on unmount
+		setUser(null);
 	}, []);
 
 	return { user, login, logout, getUsername };
