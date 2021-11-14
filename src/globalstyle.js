@@ -2,8 +2,11 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     :root {
-        --maxWidth: 1170px;
+        --maxWidth: 1000px;
+        --primary: #0275d8;
+        --secondary: #292b2c;
         --lightGrey: #aaa;
+        --medLightGrey: #8c8c8c;
         --medGrey: #353535;
         --darkGrey: #1c1c1c;
         --red: #Fc0000;

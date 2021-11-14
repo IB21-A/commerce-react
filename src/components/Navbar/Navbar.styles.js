@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
 	nav {
 		background: #00abff;
-		margin: 0 auto;
+		margin: 0 auto 10px auto;
 		box-shadow: 0 3px 7px grey;
 	}
 

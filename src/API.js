@@ -33,7 +33,7 @@ const apiSettings = {
 			localStorage.setItem("access_token", res.data.access);
 			localStorage.setItem("refresh_token", res.data.refresh);
 			axiosInstance.defaults.headers["Authorization"] =
-				"JWT " + localStorage.getItem("access_token");
+				"Bearer " + localStorage.getItem("access_token");
 			let user = jwtDecode(res.data.access); // Decode the token and get user payload data
 			return user;
 		} catch (ex) {
@@ -65,8 +65,17 @@ const apiSettings = {
 	getActiveAuctions: async () => {
 		try {
 			let auctions = await axiosInstance.get(`listings/`);
-			// console.log(auctions.data);
+			console.log(auctions.data);
 			return auctions;
+		} catch (ex) {
+			return ex;
+		}
+	},
+	getWatchList: async (userId) => {
+		try {
+			let watchList = await axiosInstance.get(`users/${userId}/watchlist`);
+			let array = Object.values(watchList.data);
+			return Object.values(watchList.data);
 		} catch (ex) {
 			return ex;
 		}

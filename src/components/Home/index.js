@@ -12,24 +12,28 @@ import { useHomeFetch } from './../../hooks/useHomeFetch';
 
 //components
 import Spinner from '../common/Spinner';
+import AuctionListing from "../AuctionListing";
+import API from "../../API";
 
 const Home = () => {
 	const auth = useAuth();
 	const user = auth.user;
-	const {state, loading, error} = useHomeFetch();
-
-	if (error) return <Wrapper>Uh oh! Something went wrong!</Wrapper>
+	const { state, loading, error } = useHomeFetch();
+	const [watchlist, setWatchlist] = useState([]);
 
 	return (
 		<>
-			<Wrapper>Welcome {user && user.username}!</Wrapper>
-			{state.results.map((auction)=>(
-				<div key={auction.id}>
-					Title: {auction.title}
-					<p>Description:{auction.description}</p>
-				</div>
-			))}
-			{loading && <Spinner/>}
+			{loading && <Spinner />}
+			<Wrapper>
+				Welcome {user && user.username}!
+				{state.results.map((auction) => (
+					<AuctionListing
+						key={auction.id}
+						auction={auction}
+						isWatched={auction.user_is_following}
+					/>
+				))}
+			</Wrapper>
 		</>
 	);
 };
