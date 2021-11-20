@@ -3,7 +3,7 @@ import axios from "axios";
 const HOME_URL = "http://172.24.1.189:8000/api/";
 const ALE_HOME_URL = "http://192.168.1.9:8000/api/";
 
-const baseURL = ALE_HOME_URL;
+const baseURL = HOME_URL;
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,

@@ -65,7 +65,7 @@ const apiSettings = {
 	getActiveAuctions: async () => {
 		try {
 			let auctions = await axiosInstance.get(`listings/`);
-			console.log(auctions.data);
+			// console.log(auctions.data);
 			return auctions;
 		} catch (ex) {
 			return ex;
@@ -79,6 +79,15 @@ const apiSettings = {
 		} catch (ex) {
 			return ex;
 		}
+	},
+	toggleWatchStatus: async (auctionId) => {
+		let watchStatus = await axiosInstance.post(`watching/`, {
+			listing_id: auctionId,
+		});
+		if (watchStatus.status === 201) {
+			return true;
+		}
+		return false;
 	},
 };
 

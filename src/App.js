@@ -31,14 +31,15 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/logout" element={<Logout />} />
 
-					<Route
+					<Route path="/home" element={<Home />} />
+					{/* <Route
 						path="/home"
 						element={
 							<RequireAuth>
 								<Home />
 							</RequireAuth>
 						}
-					/>
+					/> */}
 				</Routes>
 			</ProvideAuth>
 			<GlobalStyle />

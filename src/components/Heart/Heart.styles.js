@@ -22,5 +22,7 @@ export const Wrapper = styled.div`
 
 	.active {
 		color: red;
+
+		transition: var(--transition);
 	}
 `;
