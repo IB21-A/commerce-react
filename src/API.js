@@ -71,6 +71,15 @@ const apiSettings = {
 			return ex;
 		}
 	},
+	getAuctionDetail: async (listingId) => {
+		try {
+			let auctionDetail = await axiosInstance.get(`listings/${listingId}/`);
+			console.log(auctionDetail);
+			return auctionDetail;
+		} catch (ex) {
+			return ex;
+		}
+	},
 	getWatchList: async (userId) => {
 		try {
 			let watchList = await axiosInstance.get(`users/${userId}/watchlist`);
@@ -88,6 +97,22 @@ const apiSettings = {
 			return true;
 		}
 		return false;
+	},
+	submitBid: async (auctionId, bidAmount) => {
+		const bid = await axiosInstance
+			.post(`bids/`, {
+				listing_id: auctionId,
+				bid_amount: bidAmount,
+			})
+			.catch((error) => {
+				console.log(error.response);
+				return error.response;
+			});
+
+		if (bid.status === 201) {
+			return bid.data;
+		}
+		return bid;
 	},
 };
 
