@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const HeartContainer = styled.div`
 	border: 1px solid;
 	border-color: var(--medLightGrey);
 	height: 2.2rem;
@@ -11,6 +11,12 @@ export const Wrapper = styled.div`
 	color: var(--medLightGrey);
 	font-size: 1.4rem;
 	transition: var(--transition);
+
+	margin-top: auto;
+	margin-left: auto;
+	text-align: center;
+	white-space: nowrap;
+	flex-shrink: 0;
 
 	:hover {
 		border: 1px solid;
@@ -24,5 +30,15 @@ export const Wrapper = styled.div`
 		color: red;
 
 		transition: var(--transition);
+	}
+`;
+
+export const WatchButton = styled.div`
+	.icon {
+		color: yellow;
+		font-size: 1.1rem;
+		margin-bottom: 0.2rem;
+
+		${"" /* transition: var(--transition); */}
 	}
 `;

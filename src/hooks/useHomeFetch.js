@@ -13,12 +13,12 @@ export const useHomeFetch = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 
-	const fetchAuctions = async (page, searchTerm = "") => {
+	const fetchAuctions = async (page = 1, searchTerm) => {
 		try {
 			setError(false);
 			setLoading(false);
 
-			const auctions = await API.getActiveAuctions();
+			const auctions = await API.getActiveAuctions(page, searchTerm);
 			setState({ results: [...auctions.data.results] });
 		} catch (error) {
 			setError(true);
@@ -30,7 +30,7 @@ export const useHomeFetch = () => {
 	useEffect(() => {
 		setState(initialState);
 		fetchAuctions(1, searchTerm);
-	}, []);
+	}, [searchTerm]);
 
 	return { state, loading, error };
 };

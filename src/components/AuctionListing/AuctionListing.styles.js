@@ -39,10 +39,4 @@ export const ThumbnailContainer = styled.img`
 	height: 250px;
 `;
 
-export const HeartContainer = styled.div`
-	margin-top: auto;
-	margin-left: auto;
-	text-align: right;
-	white-space: nowrap;
-	flex-shrink: 0;
-`;
+

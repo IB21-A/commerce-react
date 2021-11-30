@@ -5,12 +5,23 @@ import { useNavigate } from "react-router-dom";
 // Assets
 import noImage from "../../assets/no-image.gif";
 // Styles
-import { Wrapper, ThumbnailContainer } from "./AuctionDetail.styles";
+import {
+	Wrapper,
+	UpperSection,
+	ThumbnailContainer,
+	BidContainer,
+	BidBox,
+	LowerSection,
+} from "./AuctionDetail.styles";
+
 // Hooks
 import { useAuctionFetch } from "./../../hooks/useAuctionFetch";
 // Components
 import Spinner from "../common/Spinner";
 import { Form, InputGroup, Button } from "react-bootstrap";
+import WatchlistToggle from "./../WatchlistToggle/Index";
+
+// API
 import API from "../../API";
 
 const AuctionDetail = () => {
@@ -18,6 +29,7 @@ const AuctionDetail = () => {
 	const [bidAmount, setBidAmount] = useState("");
 	const [formError, setFormError] = useState("");
 	const [isTopBidder, setIsTopBidder] = useState(false);
+	const [bidType, setBidType] = useState("Starting Bid:");
 	const { state, loading, error } = useAuctionFetch(listingId);
 	const navigate = useNavigate();
 
@@ -34,6 +46,18 @@ const AuctionDetail = () => {
 			}
 			return setIsTopBidder(false);
 		};
+
+		const UpdateBidType = async () => {
+			if (state.num_of_bids >= 1) {
+				if (state.is_active) {
+					return setBidType("Current Bid:");
+				}
+
+				return setBidType("Closing Bid:");
+			}
+		};
+
+		UpdateBidType();
 		UserHasTopBid();
 	}, [state]);
 
@@ -68,42 +92,77 @@ const AuctionDetail = () => {
 
 	return (
 		<Wrapper>
-			<h1>{state.title}</h1>
-			<h6>listed by {state.creator}</h6>
-			<ThumbnailContainer src={noImage} />
-			<div>${state.current_bid_price.toFixed(2)}</div>
-			<div>
-				{state.num_of_bids} bid{state.num_of_bids > 1 && "s"} with{" "}
-				{state.num_of_unique_bids} bidder{state.num_of_unique_bids > 1 && "s"}
-			</div>
-			{isTopBidder && <div>You are the current top bidder</div>}
-			<p>{state.description}</p>
-			<Form>
-				<Form.Group className="mb-3" controlId="formBid">
-					<Form.Label>Bid Amount</Form.Label>
-					<InputGroup>
-						<InputGroup.Text>$</InputGroup.Text>
-						{/* TODO add 9 digit limit */}
-						<Form.Control
-							type="number"
-							value={bidAmount}
-							onChange={(e) => handleChange(e)}
-						/>
-					</InputGroup>
-					{formError && <div className="alert alert-danger">{formError}</div>}
-					<Form.Text className="text-muted">
-						Enter bid amount. e.g. $
-						{(state.current_bid_price + 0.01).toFixed(2)}
-					</Form.Text>
-				</Form.Group>
+			<UpperSection>
+				<ThumbnailContainer src={noImage} />
+				<BidContainer>
+					<h1>{state.title}</h1>
+					<h6>listed by {state.creator}</h6>
+					<hr />
+					<BidBox>
+						<div>
+							{isTopBidder && (
+								<div className="bg-warning px-2 py-1 mb-3">
+									You are the current top bidder
+								</div>
+							)}
+						</div>
+						<Form className="two-columns">
+							<div className="two-columns price-box">
+								<div className="m-2">{bidType}</div>
+								<div className="amount-column">
+									<div className="bid-price">
+										US ${state.current_bid_price.toFixed(2)}
+									</div>
+									<Form.Group className="mb-3" controlId="formBid">
+										{/* <Form.Label>Bid Amount</Form.Label> */}
+										<InputGroup>
+											{/* <InputGroup.Text>$</InputGroup.Text> */}
+											{/* TODO add 9 digit limit */}
+											<Form.Control
+												type="number"
+												value={bidAmount}
+												onChange={(e) => handleChange(e)}
+												placeholder="Bid Amount"
+											/>
+										</InputGroup>
+										{formError && (
+											<div className="alert alert-danger">{formError}</div>
+										)}
 
-				<Button
-					variant="primary"
-					type="submit"
-					onClick={(e) => handleSubmit(e)}>
-					Submit Bid
-				</Button>
-			</Form>
+										<Form.Text className="text-muted">
+											Enter bid amount. e.g. $
+											{(state.current_bid_price + 0.01).toFixed(2)}
+										</Form.Text>
+									</Form.Group>
+								</div>
+							</div>
+							<div className="button-column">
+								<div className="bid-details">
+									{state.num_of_bids} bid{state.num_of_bids > 1 && "s"} with{" "}
+									{state.num_of_unique_bids} bidder
+									{state.num_of_unique_bids > 1 && "s"}
+								</div>
+								<Button
+									variant="primary"
+									className="custom-rounded mt-2"
+									type="submit"
+									onClick={(e) => handleSubmit(e)}>
+									Place Bid
+								</Button>
+								<WatchlistToggle
+									variant="button"
+									auctionId={listingId}
+									isWatched={state.user_is_following}
+								/>
+							</div>
+						</Form>
+					</BidBox>
+				</BidContainer>
+			</UpperSection>
+			<LowerSection>
+				<hr />
+				<p>{state.description}</p>
+			</LowerSection>
 		</Wrapper>
 	);
 };

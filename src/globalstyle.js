@@ -24,4 +24,11 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
     }
+
+    .two-columns {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        
+    }
 `;

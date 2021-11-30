@@ -2,7 +2,8 @@ import React from "react";
 // Assets
 import noImage from "../../assets/no-image.gif";
 // Components
-import Heart from "../Heart/Index";
+import WatchlistToggle from "../WatchlistToggle/Index";
+import { Link } from "react-router-dom";
 
 // Styles
 import {
@@ -13,7 +14,6 @@ import {
 	Title,
 	Description,
 	Price,
-	HeartContainer,
 } from "./AuctionListing.styles";
 const AuctionListing = ({ auction, isWatched }) => {
 	return (
@@ -21,12 +21,16 @@ const AuctionListing = ({ auction, isWatched }) => {
 			<Container>
 				<ThumbnailContainer src={noImage} />
 				<ListingDetails>
-					<Title>{auction.title}</Title>
+					<Link to={`/listings/${auction.id}`}>
+						<Title>{auction.title}</Title>
+					</Link>
 					<Description>{auction.description}</Description>
 					<Price>${auction.current_bid_price.toFixed(2)}</Price>
-					<HeartContainer>
-						<Heart auctionId={auction.id} isWatched={isWatched}></Heart>
-					</HeartContainer>
+					<WatchlistToggle
+						variant="heartContainer"
+						auctionId={auction.id}
+						isWatched={isWatched}
+					/>
 				</ListingDetails>
 			</Container>
 			<hr />
