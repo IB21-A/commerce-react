@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
 	padding: 1rem;
 	max-width: var(--maxWidth);
 
+	/* Remove number picker arrows from number input */
 	input[type="number"]::-webkit-inner-spin-button,
 	input[type="number"]::-webkit-outer-spin-button {
 		-webkit-appearance: none;
@@ -35,7 +36,18 @@ export const ThumbnailContainer = styled.img`
 	max-width: 500px;
 	max-height: 500px;
 	margin-right: 2rem;
+	margin-bottom: 1rem;
 
+	@media screen and (max-width: 600px) {
+		width: 100%;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+	}
+`;
+
+export const BidContainer = styled.div`
+	flex-grow: 1;
 	@media screen and (max-width: 600px) {
 		.button-column {
 			width: 100%;
@@ -45,10 +57,6 @@ export const ThumbnailContainer = styled.img`
 			text-align: center;
 		}
 	}
-`;
-
-export const BidContainer = styled.div`
-	flex-grow: 1;
 `;
 
 export const BidBox = styled.div`

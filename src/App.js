@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Home from "./components/Home";
 import AuctionDetail from "./components/AuctionDetail/index";
+import CreateEditListing from "./components/CreateEditListing/";
 
 // Custome Route component
 import RequireAuth from "./components/common/RequireAuth";
@@ -34,6 +35,11 @@ function App() {
 
 					<Route path="/home" element={<Home />} />
 					<Route path="/listings/:listingId" element={<AuctionDetail />} />
+					<Route path="/listings/create" element={<CreateEditListing />} />
+					<Route
+						path="/listings/edit/:listingId"
+						element={<CreateEditListing />}
+					/>
 					{/* <Route
 						path="/home"
 						element={
