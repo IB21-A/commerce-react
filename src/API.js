@@ -62,6 +62,14 @@ const apiSettings = {
 			return "";
 		}
 	},
+	getCategories: async () => {
+		try {
+			let categories = await axiosInstance.get(`categories/`);
+			return categories.data;
+		} catch (ex) {
+			return ex;
+		}
+	},
 	getActiveAuctions: async (page, searchTerm) => {
 		try {
 			const endpoint = searchTerm

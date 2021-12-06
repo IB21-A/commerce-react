@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import API from "../../API";
 
 const CreateEditListing = () => {
 	const { listingId } = useParams();
@@ -20,11 +21,18 @@ const CreateEditListing = () => {
 		start_bid: "",
 		is_active: "false",
 	});
+	const [categories, setCategories] = useState(["Categories:"]);
 	const [error, setErrors] = useState();
 	const [loading, setLoading] = useState();
 
 	useEffect(() => {
 		// if ListingId exists, then we'll attempt to grab values and populate
+		const getCategories = async () => {
+			const data = await API.getCategories();
+			setCategories(data);
+		};
+
+		getCategories();
 	}, []);
 
 	const handleChange = ({ currentTarget: input }) => {
@@ -73,10 +81,10 @@ const CreateEditListing = () => {
 							<Form.Group className="mb-3" controlId="CategorySelect">
 								<Form.Label>Category</Form.Label>
 								<Form.Select aria-label="Floating label select example">
-									<option>Populate This Menu Please!</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
+									{/* <option>Populate This Menu Please!</option> */}
+									{categories.map((category) => (
+										<option value={category.id}>{category.name}</option>
+									))}
 								</Form.Select>
 							</Form.Group>
 						</Col>
