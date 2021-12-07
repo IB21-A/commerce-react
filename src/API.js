@@ -141,6 +141,7 @@ const apiSettings = {
 
 		if (listing.status === 201) {
 			return listing.data;
+			// TODO redirect to listings/{listing.data.id}
 		}
 		return listing;
 	},

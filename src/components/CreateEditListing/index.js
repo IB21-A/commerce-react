@@ -89,6 +89,16 @@ const CreateEditListing = () => {
 						</Form.Group>
 					</Row>
 					<Row>
+						<Form.Group controlId="formFile" className="mb-3">
+							<Form.Label>Item Image</Form.Label>
+							<Form.Control
+								type="file"
+								name="image"
+								accept="image/jpeg,image/png,image/gif"
+							/>
+						</Form.Group>
+					</Row>
+					<Row>
 						<Col>
 							<Form.Group className="mb-3" controlId="startBidInput">
 								<Form.Label>Start Bid</Form.Label>
