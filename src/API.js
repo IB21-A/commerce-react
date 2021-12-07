@@ -125,6 +125,25 @@ const apiSettings = {
 		}
 		return bid;
 	},
+	createListing: async (data) => {
+		const listing = await axiosInstance
+			.post(`listings/`, {
+				title: data.title,
+				description: data.description,
+				category: data.category,
+				start_bid: data.start_bid,
+				is_active: "true",
+			})
+			.catch((error) => {
+				console.log(error.response);
+				return error.response;
+			});
+
+		if (listing.status === 201) {
+			return listing.data;
+		}
+		return listing;
+	},
 };
 
 export default apiSettings;

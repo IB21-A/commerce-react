@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const HOME_URL = "http://172.24.1.189:8000/api/";
-const HOME_URL = "http://192.168.1.9:8000/api/"; // ALE
+const HOME_URL = "http://172.24.1.189:8000/api/";
+// const HOME_URL = "http://192.168.1.9:8000/api/"; // ALE
 
 const baseURL = HOME_URL;
 

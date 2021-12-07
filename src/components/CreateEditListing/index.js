@@ -7,7 +7,8 @@ import { Wrapper, FormContainer } from "./CreateEditListing.styles";
 
 // React-Bootstrap
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
+// import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import API from "../../API";
@@ -19,10 +20,14 @@ const CreateEditListing = () => {
 		description: "",
 		category: "",
 		start_bid: "",
-		is_active: "false",
 	});
 	const [categories, setCategories] = useState(["Categories:"]);
-	const [error, setErrors] = useState();
+	const [errors, setErrors] = useState({
+		title: "",
+		description: "",
+		category: "",
+		start_bid: "",
+	});
 	const [loading, setLoading] = useState();
 
 	useEffect(() => {
@@ -39,6 +44,22 @@ const CreateEditListing = () => {
 		let newData = { ...data };
 		newData[input.name] = input.value;
 		setData(newData);
+		console.log(newData);
+	};
+
+	const doSubmit = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+		if (listingId) {
+			// Update listing
+		}
+
+		const listing = await API.createListing(data);
+		if (listing.status === 400) {
+			setErrors(listing.data);
+			console.log(listing.data);
+		}
+		return setLoading(false);
 	};
 
 	return (
@@ -54,11 +75,17 @@ const CreateEditListing = () => {
 								placeholder="e.g.: Baseball Cards"
 								name="title"
 								value={data.title}
+								isInvalid={errors.title}
 								onChange={(e) => {
 									handleChange(e);
 								}}
 								maxLength={80}
 							/>
+							{errors.title && (
+								<Form.Text className="alert-danger" tooltip>
+									{errors.title}
+								</Form.Text>
+							)}
 						</Form.Group>
 					</Row>
 					<Row>
@@ -70,22 +97,42 @@ const CreateEditListing = () => {
 									placeholder="49.99"
 									name="start_bid"
 									value={data.start_bid}
+									isInvalid={errors.start_bid}
 									onChange={(e) => {
 										handleChange(e);
 									}}
 									maxLength={9}
 								/>
+								{errors.start_bid && (
+									<Form.Text className="alert-danger" tooltip>
+										{errors.start_bid}
+									</Form.Text>
+								)}
 							</Form.Group>
 						</Col>
 						<Col>
 							<Form.Group className="mb-3" controlId="CategorySelect">
 								<Form.Label>Category</Form.Label>
-								<Form.Select aria-label="Floating label select example">
-									{/* <option>Populate This Menu Please!</option> */}
-									{categories.map((category) => (
-										<option value={category.id}>{category.name}</option>
+								<Form.Select
+									aria-label="Floating label select example"
+									name="category"
+									onChange={(e) => {
+										handleChange(e);
+									}}>
+									<option key={-1} value={-1}>
+										Select a category
+									</option>
+									{categories.map((category, index) => (
+										<option key={index} value={category.id}>
+											{category.name}
+										</option>
 									))}
 								</Form.Select>
+								{errors.category && (
+									<Form.Text className="alert-danger" tooltip>
+										{errors.category}
+									</Form.Text>
+								)}
 							</Form.Group>
 						</Col>
 					</Row>
@@ -97,11 +144,24 @@ const CreateEditListing = () => {
 							placeholder="Write a detailed description"
 							name="description"
 							value={data.description}
+							isInvalid={errors.description}
 							onChange={(e) => {
 								handleChange(e);
 							}}
 						/>
+						{errors.description && (
+							<Form.Text className="alert-danger" tooltip>
+								{errors.description}
+							</Form.Text>
+						)}
 					</Form.Group>
+					<Button
+						variant="primary"
+						type="submit"
+						onClick={(e) => doSubmit(e)}
+						disabled={loading}>
+						{loading ? "Please wait..." : "Submit"}
+					</Button>
 				</Form>
 			</FormContainer>
 		</Wrapper>
