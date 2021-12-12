@@ -1,4 +1,6 @@
 import styled from "styled-components";
+// Assets
+import noImage from "../../assets/no-image.gif";
 
 export const Wrapper = styled.div`
 	margin: 0 auto;
@@ -31,15 +33,20 @@ export const UpperSection = styled.div`
 	flex-wrap: wrap;
 `;
 
-export const ThumbnailContainer = styled.img`
+export const ThumbnailContainer = styled.img.attrs((props) => ({
+	src: props.src || noImage,
+}))`
+    flex-grow: .5;
 	border: solid lightgray 1px;
-	max-width: 500px;
-	max-height: 500px;
+	max-width: 300px;
+	max-height: 300px;
 	margin-right: 2rem;
 	margin-bottom: 1rem;
 
 	@media screen and (max-width: 600px) {
-		width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+		width: auto;
 		height: auto;
 		margin-left: auto;
 		margin-right: auto;

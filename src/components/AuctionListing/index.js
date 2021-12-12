@@ -1,6 +1,5 @@
 import React from "react";
-// Assets
-import noImage from "../../assets/no-image.gif";
+
 // Components
 import WatchlistToggle from "../WatchlistToggle/Index";
 import { Link } from "react-router-dom";
@@ -19,7 +18,7 @@ const AuctionListing = ({ auction, isWatched }) => {
 	return (
 		<Wrapper>
 			<Container>
-				<ThumbnailContainer src={noImage} />
+				<ThumbnailContainer src={auction.image_url} />
 				<ListingDetails>
 					<Link to={`/listings/${auction.id}`}>
 						<Title>{auction.title}</Title>

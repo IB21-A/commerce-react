@@ -85,7 +85,7 @@ const apiSettings = {
 	getAuctionDetail: async (listingId) => {
 		try {
 			let auctionDetail = await axiosInstance.get(`listings/${listingId}/`);
-			console.log(auctionDetail);
+			
 			return auctionDetail;
 		} catch (ex) {
 			return ex;
@@ -126,22 +126,31 @@ const apiSettings = {
 		return bid;
 	},
 	createListing: async (data) => {
+		let form_data = new FormData();
+		if (data.image_url)
+			form_data.append("image_url", data.image_url, data.image_url.name);
+		form_data.append("title", data.title);
+		form_data.append("description", data.description);
+		form_data.append("category", data.category);
+		form_data.append("start_bid", data.start_bid);
+		form_data.append("is_active", true);
+
 		const listing = await axiosInstance
-			.post(`listings/`, {
-				title: data.title,
-				description: data.description,
-				category: data.category,
-				start_bid: data.start_bid,
-				is_active: "true",
+			.post(`listings/`, form_data, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			})
+			.then((res) => {
+				return res;
 			})
 			.catch((error) => {
-				console.log(error.response);
+				
 				return error.response;
 			});
 
 		if (listing.status === 201) {
-			return listing.data;
-			// TODO redirect to listings/{listing.data.id}
+			window.location.href = `/listings/${listing.data.id}`;
 		}
 		return listing;
 	},

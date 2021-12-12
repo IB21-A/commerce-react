@@ -16,6 +16,8 @@ import {
 
 // Hooks
 import { useAuctionFetch } from "./../../hooks/useAuctionFetch";
+import { useAuth } from "../../hooks/useAuth";
+
 // Components
 import Spinner from "../common/Spinner";
 import { Form, InputGroup, Button } from "react-bootstrap";
@@ -26,28 +28,28 @@ import API from "../../API";
 
 const AuctionDetail = () => {
 	const { listingId } = useParams();
+	const { state, loading, error } = useAuctionFetch(listingId);
+	const auth = useAuth();
+	const navigate = useNavigate();
 	const [bidAmount, setBidAmount] = useState("");
 	const [formError, setFormError] = useState("");
 	const [isTopBidder, setIsTopBidder] = useState(false);
 	const [bidType, setBidType] = useState("Starting Bid:");
-	const { state, loading, error } = useAuctionFetch(listingId);
-	const navigate = useNavigate();
+	const [isUsersListing, setIsUsersListing] = useState(false);
 
 	useEffect(() => {
-		const UserHasTopBid = async () => {
+		const userHasTopBid = async () => {
 			const username = await API.getCurrentUsername();
-			console.log(username);
 			if (
 				state.bids[0] &&
 				state.bids[0].creator.toLowerCase() === username.toLowerCase()
 			) {
-				console.log(state.bids[0].creator.toLowerCase());
 				return setIsTopBidder(true);
 			}
 			return setIsTopBidder(false);
 		};
 
-		const UpdateBidType = async () => {
+		const updateBidType = async () => {
 			if (state.num_of_bids >= 1) {
 				if (state.is_active) {
 					return setBidType("Current Bid:");
@@ -57,9 +59,16 @@ const AuctionDetail = () => {
 			}
 		};
 
-		UpdateBidType();
-		UserHasTopBid();
-	}, [state]);
+		const userIsOwner = async () => {
+			if (auth.user === null) return;
+
+			return setIsUsersListing(auth.user.user_id === state.creator_id);
+		};
+
+		updateBidType();
+		userHasTopBid();
+		userIsOwner();
+	}, [state, auth]);
 
 	if (loading) {
 		return (
@@ -93,10 +102,17 @@ const AuctionDetail = () => {
 	return (
 		<Wrapper>
 			<UpperSection>
-				<ThumbnailContainer src={noImage} />
+				<ThumbnailContainer src={state.image_url} />
 				<BidContainer>
 					<h1>{state.title}</h1>
-					<h6>listed by {state.creator}</h6>
+					<div className="two-columns">
+						<h6>listed by {state.creator}</h6>
+						<div>
+							{isUsersListing && (
+								<Button variant="link">Edit this listing</Button>
+							)}
+						</div>
+					</div>
 					<hr />
 					<BidBox>
 						<div>
@@ -138,9 +154,13 @@ const AuctionDetail = () => {
 							</div>
 							<div className="button-column">
 								<div className="bid-details">
-									{state.num_of_bids} bid{state.num_of_bids > 1 && "s"} with{" "}
-									{state.num_of_unique_bids} bidder
-									{state.num_of_unique_bids > 1 && "s"}
+									{state.num_of_bids} bid
+									{(state.num_of_bids > 1 || state.num_of_bids === 0) &&
+										"s"}{" "}
+									with {state.num_of_unique_bids} bidder
+									{(state.num_of_unique_bids > 1 ||
+										state.num_of_unique_bids === 0) &&
+										"s"}
 								</div>
 								<Button
 									variant="primary"
@@ -159,7 +179,7 @@ const AuctionDetail = () => {
 					</BidBox>
 				</BidContainer>
 			</UpperSection>
-			<LowerSection>
+			<LowerSection className="preserve-whitespace">
 				<hr />
 				<p>{state.description}</p>
 			</LowerSection>

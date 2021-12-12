@@ -40,7 +40,7 @@ const WatchlistToggle = ({ auctionId, isWatched, variant }) => {
 	if (variant === "button") {
 		return (
 			<WatchButton onClick={handleClick}>
-				<Button variant="primary" className="custom-rounded mt-3">
+				<Button variant="secondary" className="custom-rounded mt-3">
 					{isWatching ? (
 						<FaStar className="icon" />
 					) : (

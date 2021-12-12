@@ -15,18 +15,32 @@ import API from "../../API";
 
 const CreateEditListing = () => {
 	const { listingId } = useParams();
+    
 	const [data, setData] = useState({
 		title: "",
 		description: "",
 		category: "",
 		start_bid: "",
+		image_url: "",
 	});
-	const [categories, setCategories] = useState(["Categories:"]);
+	const [categories, setCategories] = useState([
+		{
+			id: "noid",
+			name: "Server unavailable",
+			listings: [],
+		},
+		{
+			id: "noid2",
+			name: "",
+			listings: [],
+		},
+	]);
 	const [errors, setErrors] = useState({
 		title: "",
 		description: "",
 		category: "",
 		start_bid: "",
+		image_url: "",
 	});
 	const [loading, setLoading] = useState();
 
@@ -41,10 +55,18 @@ const CreateEditListing = () => {
 	}, []);
 
 	const handleChange = ({ currentTarget: input }) => {
+		// console.log(input);
 		let newData = { ...data };
 		newData[input.name] = input.value;
 		setData(newData);
 		console.log(newData);
+	};
+
+	const handleImageChange = (e) => {
+		console.log(e.target.files[0]);
+		let newData = { ...data };
+		newData["image_url"] = e.target.files[0];
+		setData(newData);
 	};
 
 	const doSubmit = async (e) => {
@@ -59,6 +81,7 @@ const CreateEditListing = () => {
 			setErrors(listing.data);
 			console.log(listing.data);
 		}
+
 		return setLoading(false);
 	};
 
@@ -93,9 +116,17 @@ const CreateEditListing = () => {
 							<Form.Label>Item Image</Form.Label>
 							<Form.Control
 								type="file"
-								name="image"
+								name="image_url"
 								accept="image/jpeg,image/png,image/gif"
+								onChange={(e) => {
+									handleImageChange(e);
+								}}
 							/>
+							{errors.image_url && (
+								<Form.Text className="alert-danger" tooltip>
+									{errors.image_url}
+								</Form.Text>
+							)}
 						</Form.Group>
 					</Row>
 					<Row>
@@ -129,7 +160,7 @@ const CreateEditListing = () => {
 									onChange={(e) => {
 										handleChange(e);
 									}}>
-									<option key={-1} value={-1}>
+									<option key={"slect"} value={-1}>
 										Select a category
 									</option>
 									{categories.map((category, index) => (
@@ -150,6 +181,7 @@ const CreateEditListing = () => {
 						<Form.Label>Description</Form.Label>
 						<Form.Control
 							as="textarea"
+							className="preserve-whitespace"
 							rows={10}
 							placeholder="Write a detailed description"
 							name="description"

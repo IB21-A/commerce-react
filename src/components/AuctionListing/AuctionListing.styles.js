@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { screen } from "@testing-library/react";
+
+// Assets
+import noImage from "../../assets/no-image.gif";
 
 export const Wrapper = styled.div`
 	margin-top: 0.5rem;
@@ -34,10 +36,14 @@ export const Price = styled.div`
 `;
 export const Description = styled.div``;
 
-export const ThumbnailContainer = styled.img`
+export const ThumbnailContainer = styled.img.attrs(props=> ({src: props.src || noImage}))`
+
 	border: solid lightgray 1px;
 	width: 250px;
 	height: 250px;
 `;
 
+ThumbnailContainer.defaultProps = {
+	src: noImage
+};
 

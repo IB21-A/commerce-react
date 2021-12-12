@@ -31,4 +31,8 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: space-between;
         
     }
+
+    .preserve-whitespace {
+        white-space: pre-wrap;
+    }
 `;
