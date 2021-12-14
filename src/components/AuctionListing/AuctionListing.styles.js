@@ -36,14 +36,18 @@ export const Price = styled.div`
 `;
 export const Description = styled.div``;
 
-export const ThumbnailContainer = styled.img.attrs(props=> ({src: props.src || noImage}))`
+export const ThumbnailContainer = styled.div``;
 
+export const Thumbnail = styled.img.attrs((props) => ({
+	src: props.src || noImage,
+}))`
 	border: solid lightgray 1px;
+	object-fit: contain;
 	width: 250px;
 	height: 250px;
 `;
 
-ThumbnailContainer.defaultProps = {
-	src: noImage
+Thumbnail.defaultProps = {
+	src: noImage,
 };
 

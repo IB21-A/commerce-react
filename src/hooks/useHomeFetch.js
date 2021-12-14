@@ -17,7 +17,6 @@ export const useHomeFetch = () => {
 		try {
 			setError(false);
 			setLoading(false);
-
 			const auctions = await API.getActiveAuctions(page, searchTerm);
 			setState({ results: [...auctions.data.results] });
 		} catch (error) {

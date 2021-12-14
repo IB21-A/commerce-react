@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import {
 	Container,
 	ThumbnailContainer,
+	Thumbnail,
 	Wrapper,
 	ListingDetails,
 	Title,
@@ -18,7 +19,9 @@ const AuctionListing = ({ auction, isWatched }) => {
 	return (
 		<Wrapper>
 			<Container>
-				<ThumbnailContainer src={auction.image_url} />
+				<ThumbnailContainer>
+					<Thumbnail src={auction.image_url} />
+				</ThumbnailContainer>
 				<ListingDetails>
 					<Link to={`/listings/${auction.id}`}>
 						<Title>{auction.title}</Title>
