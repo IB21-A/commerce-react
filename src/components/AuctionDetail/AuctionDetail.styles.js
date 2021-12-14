@@ -31,27 +31,31 @@ export const Wrapper = styled.div`
 export const UpperSection = styled.div`
 	display: flex;
 	flex-wrap: wrap;
+	gap: 2rem;
 `;
 
-export const ThumbnailContainer = styled.img.attrs((props) => ({
+export const Thumbnail = styled.img.attrs((props) => ({
 	src: props.src || noImage,
 }))`
-    flex-grow: .5;
 	border: solid lightgray 1px;
-	max-width: 300px;
-	max-height: 300px;
-	margin-right: 2rem;
-	margin-bottom: 1rem;
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+`;
 
-	@media screen and (max-width: 600px) {
-        max-width: 100%;
-        max-height: 100%;
-		width: auto;
-		height: auto;
-		margin-left: auto;
-		margin-right: auto;
+export const ThumbnailContainer = styled.div`
+	flex-grow: 0.5;
+	max-width: 250px;
+	max-height: 250px;
+	margin-left: auto;
+	margin-right: auto;
+
+	@media screen and (max-width: 768px) {
+		max-width: 100vw;
+		max-height: 50vw;
 	}
 `;
+
 
 export const BidContainer = styled.div`
 	flex-grow: 1;

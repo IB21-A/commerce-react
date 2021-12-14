@@ -9,6 +9,7 @@ import {
 	Wrapper,
 	UpperSection,
 	ThumbnailContainer,
+	Thumbnail,
 	BidContainer,
 	BidBox,
 	LowerSection,
@@ -102,7 +103,7 @@ const AuctionDetail = () => {
 	return (
 		<Wrapper>
 			<UpperSection>
-				<ThumbnailContainer src={state.image_url} />
+				<ThumbnailContainer><Thumbnail src={state.image_url} /></ThumbnailContainer>
 				<BidContainer>
 					<h1>{state.title}</h1>
 					<div className="two-columns">
