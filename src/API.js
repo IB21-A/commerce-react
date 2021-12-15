@@ -85,7 +85,7 @@ const apiSettings = {
 	getAuctionDetail: async (listingId) => {
 		try {
 			let auctionDetail = await axiosInstance.get(`listings/${listingId}/`);
-			
+
 			return auctionDetail;
 		} catch (ex) {
 			return ex;
@@ -126,14 +126,7 @@ const apiSettings = {
 		return bid;
 	},
 	createListing: async (data) => {
-		let form_data = new FormData();
-		if (data.image_url)
-			form_data.append("image_url", data.image_url, data.image_url.name);
-		form_data.append("title", data.title);
-		form_data.append("description", data.description);
-		form_data.append("category", data.category);
-		form_data.append("start_bid", data.start_bid);
-		form_data.append("is_active", true);
+		let form_data = generateListingFormData(data);
 
 		const listing = await axiosInstance
 			.post(`listings/`, form_data, {
@@ -145,7 +138,6 @@ const apiSettings = {
 				return res;
 			})
 			.catch((error) => {
-				
 				return error.response;
 			});
 
@@ -154,6 +146,40 @@ const apiSettings = {
 		}
 		return listing;
 	},
+	editListing: async (listingId, data) => {
+		let form_data = generateListingFormData(data);
+
+		const listing = await axiosInstance
+			.put(`listings/${listingId}/`, form_data, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			})
+			.then((res) => {
+				console.log(res);
+				return res;
+			})
+			.catch((error) => {
+				return error.response;
+			});
+
+		if (listing.status === 200) {
+			window.location.href = `/listings/${listing.data.id}`;
+		}
+		return listing;
+	},
+};
+
+const generateListingFormData = (data) => {
+	const form_data = new FormData();
+	if (data.image_url && data.image_url instanceof File)
+		form_data.append("image_url", data.image_url, data.image_url.name);
+	form_data.append("title", data.title);
+	form_data.append("description", data.description);
+	form_data.append("category", data.category);
+	form_data.append("start_bid", data.start_bid);
+	form_data.append("is_active", true);
+	return form_data;
 };
 
 export default apiSettings;

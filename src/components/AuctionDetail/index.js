@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Assets
 import noImage from "../../assets/no-image.gif";
@@ -100,17 +100,23 @@ const AuctionDetail = () => {
 		setBidAmount(input.value);
 	};
 
+	
+
 	return (
 		<Wrapper>
 			<UpperSection>
-				<ThumbnailContainer><Thumbnail src={state.image_url} /></ThumbnailContainer>
+				<ThumbnailContainer>
+					<Thumbnail src={state.image_url} />
+				</ThumbnailContainer>
 				<BidContainer>
-					<h1>{state.title}</h1>
-					<div className="two-columns">
+					<h2 className="title">{state.title}</h2>
+					<div className="two-columns space-between">
 						<h6>listed by {state.creator}</h6>
 						<div>
 							{isUsersListing && (
-								<Button variant="link">Edit this listing</Button>
+								<Link to={`/listings/edit/${listingId}`}>
+									<Button variant="link">Edit this listing</Button>
+								</Link>
 							)}
 						</div>
 					</div>
@@ -123,8 +129,8 @@ const AuctionDetail = () => {
 								</div>
 							)}
 						</div>
-						<Form className="two-columns">
-							<div className="two-columns price-box">
+						<Form className="two-columns space-between">
+							<div className="two-columns space-between price-box">
 								<div className="m-2">{bidType}</div>
 								<div className="amount-column">
 									<div className="bid-price">

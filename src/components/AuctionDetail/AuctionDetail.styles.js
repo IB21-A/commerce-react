@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
 export const UpperSection = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	gap: 2rem;
+	gap: 1rem;
 `;
 
 export const Thumbnail = styled.img.attrs((props) => ({
@@ -44,7 +44,7 @@ export const Thumbnail = styled.img.attrs((props) => ({
 `;
 
 export const ThumbnailContainer = styled.div`
-	flex-grow: 0.5;
+	flex-grow: 1;
 	max-width: 250px;
 	max-height: 250px;
 	margin-left: auto;
@@ -56,16 +56,21 @@ export const ThumbnailContainer = styled.div`
 	}
 `;
 
-
 export const BidContainer = styled.div`
-	flex-grow: 1;
-	@media screen and (max-width: 600px) {
+	overflow-wrap: anywhere;
+	${"" /* flex-grow: 0.5; */}
+
+	@media screen and (max-width: 768px) {
 		.button-column {
 			width: 100%;
 		}
 
 		.bid-details {
 			text-align: center;
+		}
+
+		.title {
+			max-width: 100%;
 		}
 	}
 `;

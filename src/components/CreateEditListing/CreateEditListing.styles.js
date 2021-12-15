@@ -23,3 +23,18 @@ export const FormContainer = styled.div`
 		padding-bottom: 1rem;
 	}
 `;
+
+export const Thumbnail = styled.img.attrs((props) => ({
+	src: props.src,
+}))`
+	border: solid lightgray 1px;
+	object-fit: contain;
+	width: 250px;
+	height: 250px;
+	margin-bottom: 1rem;
+	margin-right: 1rem;
+`;
+
+Thumbnail.defaultProps = {
+	src: "",
+};

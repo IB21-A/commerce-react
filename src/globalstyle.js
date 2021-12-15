@@ -28,8 +28,12 @@ export const GlobalStyle = createGlobalStyle`
     .two-columns {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         
+        
+    }
+
+    .space-between {
+        justify-content: space-between;
     }
 
     .preserve-whitespace {

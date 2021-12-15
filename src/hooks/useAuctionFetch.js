@@ -27,6 +27,10 @@ export const useAuctionFetch = (listingId) => {
 	const [error, setError] = useState(false);
 
 	const getAuctionById = async (listingId) => {
+		if (!listingId) {
+			return setState(initialState);
+		}
+
 		try {
 			setError(false);
 			setLoading(false);

@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+
 import { Wrapper } from "./Navbar.styles";
 
 import { FaBars } from "react-icons/fa";
@@ -28,6 +30,7 @@ const Navbar = () => {
 				<div className="nav-center">
 					<div className="nav-header">
 						<h1>eBid!</h1>
+
 						<button
 							className="nav-toggle"
 							onClick={() => setShowLinks(!showLinks)}>
@@ -35,29 +38,31 @@ const Navbar = () => {
 						</button>
 					</div>
 					<div className="links-container" ref={linksContainerRef}>
-					{!user && <ul className="links" ref={linksRef}>
+						<ul className="links" ref={linksRef}>
 							<a href="/">
-								<li>Searchbar</li>
+								<li>Home</li>
 							</a>
-
-							<a href="/register">
-								<li>Register</li>
-							</a>
-							<a href="/login">
-								<li>Login</li>
-							</a>
-						</ul>}
-					{user && <ul className="links" ref={linksRef}>
-							<a href="/">
-								<li>Searchbar</li>
-							</a>
-							<a href="/profile">
-								<li>{user.username}</li>
-							</a>
-							<a href="/logout">
-								<li>Logout</li>
-							</a>
-						</ul>}
+							{!user && (
+								<>
+									<a href="/register">
+										<li>Register</li>
+									</a>
+									<a href="/login">
+										<li>Login</li>
+									</a>
+								</>
+							)}
+							{user && (
+								<>
+									<a href="/profile">
+										<li>{user.username}</li>
+									</a>
+									<a href="/logout">
+										<li>Logout</li>
+									</a>
+								</>
+							)}
+						</ul>
 					</div>
 				</div>
 			</nav>

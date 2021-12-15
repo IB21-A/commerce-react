@@ -33,7 +33,7 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/logout" element={<Logout />} />
 
-					<Route path="/home" element={<Home />} />
+					<Route path="/" element={<Home />} />
 					<Route path="/listings/:listingId" element={<AuctionDetail />} />
 					<Route path="/listings/create" element={<CreateEditListing />} />
 					<Route
