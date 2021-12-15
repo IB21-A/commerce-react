@@ -116,7 +116,7 @@ const CreateEditListing = () => {
 		if (listing.status === 400) {
 			setErrors(listing.data);
 			console.log(listing.data);
-		}
+		} 
 
 		return setLoading(false);
 	};
