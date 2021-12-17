@@ -5,12 +5,12 @@ import noImage from "../../assets/no-image.gif";
 
 export const Wrapper = styled.div`
 	margin-top: 0.5rem;
-	padding: 0.5rem;
+	padding: 0 0.5rem;
 	width: auto;
 
 	hr {
 		width: 100%;
-		margin: 0.5rem auto;
+		margin: 1.5rem auto;
 		opacity: 10%;
 	}
 `;
@@ -35,7 +35,6 @@ export const Price = styled.div`
 	font-weight: 500;
 `;
 export const Description = styled.div``;
-
 export const ThumbnailContainer = styled.div``;
 
 export const Thumbnail = styled.img.attrs((props) => ({

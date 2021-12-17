@@ -13,19 +13,26 @@ import { useHomeFetch } from './../../hooks/useHomeFetch';
 //components
 import Spinner from '../common/Spinner';
 import AuctionListing from "../AuctionListing";
+import SearchBar from "../SearchBar";
+
 import API from "../../API";
 
 const Home = () => {
 	const auth = useAuth();
 	const user = auth.user;
-	const { state, loading, error } = useHomeFetch();
+	const { state, loading, error, setSearchTerm } = useHomeFetch();
 	const [watchlist, setWatchlist] = useState([]);
+
+	useEffect(() => {
+		console.log("home");
+		console.log(state);
+	}, [state]);
 
 	return (
 		<>
+			<SearchBar setSearchTerm={setSearchTerm} />
 			{loading && <Spinner />}
 			<Wrapper>
-				Welcome {user && user.username}!
 				{state.results.map((auction) => (
 					<AuctionListing
 						key={auction.id}

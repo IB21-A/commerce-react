@@ -39,4 +39,8 @@ export const GlobalStyle = createGlobalStyle`
     .preserve-whitespace {
         white-space: pre-wrap;
     }
+
+    .gap {
+        gap: 1rem;
+    }
 `;

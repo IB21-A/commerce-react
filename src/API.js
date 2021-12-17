@@ -76,7 +76,7 @@ const apiSettings = {
 				? `listings/?page=${page}&search=${searchTerm}`
 				: `listings/?page=${page}`;
 			let auctions = await axiosInstance.get(endpoint);
-			// console.log(auctions.data);
+			console.log(auctions.data);
 			return auctions;
 		} catch (ex) {
 			return ex;
