@@ -54,7 +54,7 @@ const Navbar = () => {
 							)}
 							{user && (
 								<>
-									<a href="/profile">
+									<a href={`/profile/${user.username}`}>
 										<li>{user.username}</li>
 									</a>
 									<a href="/logout">

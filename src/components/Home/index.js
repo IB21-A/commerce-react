@@ -12,7 +12,7 @@ import { useHomeFetch } from './../../hooks/useHomeFetch';
 
 //components
 import Spinner from '../common/Spinner';
-import AuctionListing from "../AuctionListing";
+import AuctionListingRow from "../AuctionListingRow";
 import SearchBar from "../SearchBar";
 
 import API from "../../API";
@@ -23,7 +23,6 @@ const Home = () => {
 	const user = auth.user;
 	const { state, loading, error, setSearchTerm, pageNum, setPageNum } =
 		useHomeFetch();
-	const [watchlist, setWatchlist] = useState([]);
 
 	useEffect(() => {
 		// console.log("home");
@@ -38,7 +37,7 @@ const Home = () => {
 				{state.results.map(
 					(auction) =>
 						auction.is_active && (
-							<AuctionListing
+							<AuctionListingRow
 								key={auction.id}
 								auction={auction}
 								isWatched={auction.user_is_following}

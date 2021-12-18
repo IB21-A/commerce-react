@@ -6,9 +6,11 @@ import API from "../../API";
 import { HeartContainer, WatchButton } from "./WatchlistToggle.styles";
 import { Button } from "react-bootstrap";
 
-const WatchlistToggle = ({ auctionId, isWatched, variant }) => {
+import { useNavigate, Link } from "react-router-dom";
+
+const WatchlistToggle = ({ auctionId, isWatched, variant, isAuthorized }) => {
 	const watching = isWatched;
-	// console.log(auctionId, isWatched);
+	const navigate = useNavigate();
 	const [isWatching, setIsWatching] = useState(false);
 
 	useEffect(() => {
@@ -16,6 +18,9 @@ const WatchlistToggle = ({ auctionId, isWatched, variant }) => {
 	}, [watching]);
 
 	const handleClick = async () => {
+		if (!isAuthorized) {
+			navigate(`/login/`);
+		}
 		// Send API call to update status with auctionId
 		// Get the updated status and set state
 		let status = await API.toggleWatchStatus(auctionId);

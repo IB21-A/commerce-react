@@ -9,6 +9,7 @@ import Logout from "./components/Logout";
 import Home from "./components/Home";
 import AuctionDetail from "./components/AuctionDetail/index";
 import CreateEditListing from "./components/CreateEditListing/";
+import Profile from "./components/Profile";
 
 // Custome Route component
 import RequireAuth from "./components/common/RequireAuth";
@@ -34,6 +35,7 @@ function App() {
 					<Route path="/logout" element={<Logout />} />
 
 					<Route path="/" element={<Home />} />
+					<Route path="/profile/:userName" element={<Profile />} />
 					<Route path="/listings/:listingId" element={<AuctionDetail />} />
 					<Route path="/listings/create" element={<CreateEditListing />} />
 					<Route

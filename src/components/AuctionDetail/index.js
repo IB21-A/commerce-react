@@ -83,6 +83,9 @@ const AuctionDetail = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (auth.user === null) {
+			navigate(`/login/`);
+		}
 		setFormError("");
 		const bid = await API.submitBid(listingId, bidAmount);
 		// console.log(bid.data.bid_amount);
@@ -99,8 +102,6 @@ const AuctionDetail = () => {
 	const handleChange = ({ currentTarget: input }) => {
 		setBidAmount(input.value);
 	};
-
-	
 
 	return (
 		<Wrapper>
@@ -147,6 +148,7 @@ const AuctionDetail = () => {
 													value={bidAmount}
 													onChange={(e) => handleChange(e)}
 													placeholder="Bid Amount"
+													isInvalid={formError}
 												/>
 											</InputGroup>
 											{formError && (
@@ -184,6 +186,7 @@ const AuctionDetail = () => {
 											variant="button"
 											auctionId={listingId}
 											isWatched={state.user_is_following}
+											isAuthorized={auth.user}
 										/>
 									</>
 								)}

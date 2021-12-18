@@ -45,8 +45,8 @@ export const Thumbnail = styled.img.attrs((props) => ({
 
 export const ThumbnailContainer = styled.div`
 	flex-grow: 1;
-	max-width: 250px;
-	max-height: 250px;
+	max-width: 400px;
+	max-height: 400px;
 	margin-left: auto;
 	margin-right: auto;
 

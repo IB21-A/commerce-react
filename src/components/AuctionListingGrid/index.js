@@ -14,7 +14,7 @@ import {
 	Title,
 	Description,
 	Price,
-} from "./AuctionListing.styles";
+} from "./AuctionListingGrid.styles";
 const AuctionListing = ({ auction, isWatched }) => {
 	return (
 		<Wrapper>
