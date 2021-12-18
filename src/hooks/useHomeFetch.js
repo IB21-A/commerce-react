@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import API from "../API";
 
 const initialState = {
-	page: 1,
+	count: 1,
+	next: null,
+	previous: null,
+	total_pages: 1,
 	results: [],
 };
 
@@ -12,15 +15,15 @@ export const useHomeFetch = () => {
 	const [state, setState] = useState(initialState);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
+	const [pageNum, setPageNum] = useState(1);
 
-	const fetchAuctions = async (page = 1, searchTerm) => {
+	const fetchAuctions = async (pageNum, searchTerm) => {
 		try {
 			setError(false);
 			setLoading(false);
-			const auctions = await API.getActiveAuctions(page, searchTerm);
-			setState({ results: [...auctions.data.results] });
-			console.log("useHomeFetch");
-			console.log(auctions.data.results);
+			const auctions = await API.getActiveAuctions(pageNum, searchTerm);
+			setState({ ...auctions.data });
+			// console.log("useHomeFetch", auctions.data);
 		} catch (error) {
 			setError(true);
 			console.log(error);
@@ -30,10 +33,10 @@ export const useHomeFetch = () => {
 
 	useEffect(() => {
 		setState(initialState);
-		fetchAuctions(1, searchTerm);
-	}, [searchTerm]);
+		fetchAuctions(pageNum, searchTerm);
+	}, [pageNum, searchTerm]);
 
-	return { state, loading, error, setSearchTerm };
+	return { state, loading, error, setSearchTerm, pageNum, setPageNum };
 };
 
 // useEffect(() => {

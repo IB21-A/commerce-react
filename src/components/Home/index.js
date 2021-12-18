@@ -16,16 +16,18 @@ import AuctionListing from "../AuctionListing";
 import SearchBar from "../SearchBar";
 
 import API from "../../API";
+import Paginator from "../common/Paginator";
 
 const Home = () => {
 	const auth = useAuth();
 	const user = auth.user;
-	const { state, loading, error, setSearchTerm } = useHomeFetch();
+	const { state, loading, error, setSearchTerm, pageNum, setPageNum } =
+		useHomeFetch();
 	const [watchlist, setWatchlist] = useState([]);
 
 	useEffect(() => {
-		console.log("home");
-		console.log(state);
+		// console.log("home");
+		// console.log(state);
 	}, [state]);
 
 	return (
@@ -33,13 +35,21 @@ const Home = () => {
 			<SearchBar setSearchTerm={setSearchTerm} />
 			{loading && <Spinner />}
 			<Wrapper>
-				{state.results.map((auction) => (
-					<AuctionListing
-						key={auction.id}
-						auction={auction}
-						isWatched={auction.user_is_following}
-					/>
-				))}
+				{state.results.map(
+					(auction) =>
+						auction.is_active && (
+							<AuctionListing
+								key={auction.id}
+								auction={auction}
+								isWatched={auction.user_is_following}
+							/>
+						)
+				)}
+				<Paginator
+					totalPages={state.total_pages}
+					currentPage={pageNum}
+					setCurrentPage={setPageNum}
+				/>
 			</Wrapper>
 		</>
 	);
