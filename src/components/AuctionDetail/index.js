@@ -136,27 +136,29 @@ const AuctionDetail = () => {
 									<div className="bid-price">
 										US ${state.current_bid_price.toFixed(2)}
 									</div>
-									<Form.Group className="mb-3" controlId="formBid">
-										{/* <Form.Label>Bid Amount</Form.Label> */}
-										<InputGroup>
-											{/* <InputGroup.Text>$</InputGroup.Text> */}
-											{/* TODO add 9 digit limit */}
-											<Form.Control
-												type="number"
-												value={bidAmount}
-												onChange={(e) => handleChange(e)}
-												placeholder="Bid Amount"
-											/>
-										</InputGroup>
-										{formError && (
-											<div className="alert alert-danger">{formError}</div>
-										)}
+									{!isUsersListing && (
+										<Form.Group className="mb-3" controlId="formBid">
+											{/* <Form.Label>Bid Amount</Form.Label> */}
+											<InputGroup>
+												{/* <InputGroup.Text>$</InputGroup.Text> */}
+												{/* TODO add 9 digit limit */}
+												<Form.Control
+													type="number"
+													value={bidAmount}
+													onChange={(e) => handleChange(e)}
+													placeholder="Bid Amount"
+												/>
+											</InputGroup>
+											{formError && (
+												<div className="alert alert-danger">{formError}</div>
+											)}
 
-										<Form.Text className="text-muted">
-											Enter bid amount. e.g. $
-											{(state.current_bid_price + 0.01).toFixed(2)}
-										</Form.Text>
-									</Form.Group>
+											<Form.Text className="text-muted">
+												Enter bid amount. e.g. $
+												{(state.current_bid_price + 0.01).toFixed(2)}
+											</Form.Text>
+										</Form.Group>
+									)}
 								</div>
 							</div>
 							<div className="button-column">
@@ -169,18 +171,22 @@ const AuctionDetail = () => {
 										state.num_of_unique_bids === 0) &&
 										"s"}
 								</div>
-								<Button
-									variant="primary"
-									className="custom-rounded mt-2"
-									type="submit"
-									onClick={(e) => handleSubmit(e)}>
-									Place Bid
-								</Button>
-								<WatchlistToggle
-									variant="button"
-									auctionId={listingId}
-									isWatched={state.user_is_following}
-								/>
+								{!isUsersListing && (
+									<>
+										<Button
+											variant="primary"
+											className="custom-rounded mt-2"
+											type="submit"
+											onClick={(e) => handleSubmit(e)}>
+											Place Bid
+										</Button>
+										<WatchlistToggle
+											variant="button"
+											auctionId={listingId}
+											isWatched={state.user_is_following}
+										/>
+									</>
+								)}
 							</div>
 						</Form>
 					</BidBox>

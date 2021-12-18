@@ -4,6 +4,9 @@ import React from "react";
 import Pagination from "react-bootstrap/Pagination";
 import PageItem from "react-bootstrap/PageItem";
 
+// Styles
+import {Wrapper} from "./Paginator.styles";
+
 const Index = ({ currentPage, setCurrentPage, totalPages }) => {
 	let active = currentPage;
 	let items = [];
@@ -23,14 +26,13 @@ const Index = ({ currentPage, setCurrentPage, totalPages }) => {
 		);
 	}
 
-	const paginationBasic = (
-		<div>
-			<Pagination>{items}</Pagination>
-			<br />
-		</div>
-	);
 
-	return <Pagination>{items}</Pagination>;
+
+	return (
+		<Wrapper>
+			<Pagination size="lg">{items}</Pagination>
+		</Wrapper>
+	);
 };
 
 export default Index;

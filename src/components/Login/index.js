@@ -82,7 +82,7 @@ const Login = () => {
 		await validate();
 		const loggedIn = await attemptLogin();
 		if (loggedIn) {
-			navigate("/home");
+			navigate("/");
 		}
 	};
 
