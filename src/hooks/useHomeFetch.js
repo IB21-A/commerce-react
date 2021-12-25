@@ -20,7 +20,7 @@ export const useHomeFetch = () => {
 	const fetchAuctions = async (pageNum, searchTerm) => {
 		try {
 			setError(false);
-			setLoading(false);
+			setLoading(true);
 			const auctions = await API.getActiveAuctions(pageNum, searchTerm);
 			setState({ ...auctions.data });
 			// console.log("useHomeFetch", auctions.data);

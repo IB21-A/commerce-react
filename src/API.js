@@ -82,6 +82,15 @@ const apiSettings = {
 			return ex;
 		}
 	},
+	getProfileDetail: async (userId) => {
+		try {
+			let profile = await axiosInstance.get(`users/${userId}/`);
+
+			return profile;
+		} catch (ex) {
+			return ex;
+		}
+	},
 	getAuctionDetail: async (listingId) => {
 		try {
 			let auctionDetail = await axiosInstance.get(`listings/${listingId}/`);

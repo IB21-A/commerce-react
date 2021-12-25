@@ -37,6 +37,7 @@ const AuctionDetail = () => {
 	const [isTopBidder, setIsTopBidder] = useState(false);
 	const [bidType, setBidType] = useState("Starting Bid:");
 	const [isUsersListing, setIsUsersListing] = useState(false);
+	console.log(state);
 
 	useEffect(() => {
 		const userHasTopBid = async () => {

@@ -33,7 +33,7 @@ export const useAuctionFetch = (listingId) => {
 
 		try {
 			setError(false);
-			setLoading(false);
+			setLoading(true);
 
 			const auction = await API.getAuctionDetail(listingId);
 			if (auction.status !== 200) {
