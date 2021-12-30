@@ -113,7 +113,10 @@ const AuctionDetail = () => {
 				<BidContainer>
 					<h2 className="title">{state.title}</h2>
 					<div className="two-columns space-between">
-						<h6>listed by {state.creator}</h6>
+						<h6>
+							listed by{" "}
+							<Link to={`/profile/${state.creator}`}>{state.creator}</Link>
+						</h6>
 						<div>
 							{isUsersListing && (
 								<Link to={`/listings/edit/${listingId}`}>

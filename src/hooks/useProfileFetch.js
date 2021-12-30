@@ -28,6 +28,7 @@ export const useProfileFetch = (userName) => {
 			setLoading(true);
 
 			const profile = await API.getProfileDetail(userName);
+			await profile.data.listings.reverse();
 			if (profile.status !== 200) {
 				setError(true);
 				return;

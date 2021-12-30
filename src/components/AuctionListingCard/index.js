@@ -18,15 +18,14 @@ const AuctionListingCard = ({ auction }) => {
 		id: 36,
 		title: "Auction Title",
 		current_bid_price: 49.99,
-		image_url: "http://172.24.1.189:8000/media/images/Salchipapas.jpg",
+		image_url: "",
 	};
-	console.log(auction);
 
 	return (
 		<Wrapper>
 			<ThumbnailContainer>
 				<Link to={`/listings/${auction.id}`}>
-					<Thumbnail src={"http://172.24.1.189:8000" + auction.image_url} />
+					<Thumbnail src={auction.image_url} />
 				</Link>
 			</ThumbnailContainer>
 			<InfoContainer>

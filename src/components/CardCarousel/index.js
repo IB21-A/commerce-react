@@ -14,7 +14,6 @@ import AuctionListingCard from "../AuctionListingCard";
 
 const CardCarousel = ({ listings }) => {
 	const totalListings = listings.length;
-	console.log(listings);
 
 	return (
 		<Wrapper>

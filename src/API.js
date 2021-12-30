@@ -85,7 +85,6 @@ const apiSettings = {
 	getProfileDetail: async (userId) => {
 		try {
 			let profile = await axiosInstance.get(`users/${userId}/`);
-
 			return profile;
 		} catch (ex) {
 			return ex;
