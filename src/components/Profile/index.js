@@ -19,7 +19,7 @@ const Profile = () => {
 			{loading && <Spinner />}
 			{!loading && (
 				<>
-					<h1>{state.username}'s Profile</h1>
+					<h1 className="text-capitalize">{state.username}'s Profile</h1>
 					<p>Image can go here</p>
 					<p>We'll add some tables for auctions, watchlists, etc.</p>
 					<h2>Active Listings</h2>

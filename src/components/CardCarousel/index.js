@@ -23,15 +23,15 @@ const CardCarousel = ({ listings }) => {
 				isIntrinsicHeight={true}
 				totalSlides={totalListings}
 				visibleSlides={4}>
-				<Slider>
+				<Slider className="mb-2">
 					{listings.map((listing, index) => (
 						<Slide key={index} index={index}>
 							<AuctionListingCard auction={listing} />
 						</Slide>
 					))}
 				</Slider>
-				<ButtonBack>Back</ButtonBack>
-				<ButtonNext>Next</ButtonNext>
+				<ButtonBack className="btn-sm btn-primary">Back</ButtonBack>
+				<ButtonNext className="btn-sm btn-primary ms-2">Next</ButtonNext>
 			</CarouselProvider>
 		</Wrapper>
 	);

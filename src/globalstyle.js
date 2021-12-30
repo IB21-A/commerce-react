@@ -50,4 +50,5 @@ export const GlobalStyle = createGlobalStyle`
     .gap {
         gap: 1rem;
     }
+
 `;
