@@ -15,7 +15,7 @@ const Profile = () => {
 	const { state, loading, error } = useProfileFetch(userName);
 
 	return (
-		<Wrapper className="max-width-padding">
+		<Wrapper className="max-width-margin">
 			{loading && <Spinner />}
 			{!loading && (
 				<>

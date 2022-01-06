@@ -33,7 +33,7 @@ const Home = () => {
 		<>
 			<SearchBar setSearchTerm={setSearchTerm} />
 			{loading && <Spinner />}
-			<Wrapper>
+			<Wrapper className="max-width-margin">
 				<ListingsContainer>
 					{state.results.map(
 						(auction) =>

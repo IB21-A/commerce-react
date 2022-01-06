@@ -21,7 +21,7 @@ const SearchBar = ({ setSearchTerm }) => {
 	};
 
 	return (
-		<Wrapper>
+		<Wrapper className="max-width-margin">
 			<Form onSubmit={doSearch}>
 				<Form.Group className="mb-3 " controlId="formSearchTerm">
 					<div className="two-columns gap">

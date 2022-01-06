@@ -15,8 +15,8 @@ export const GlobalStyle = createGlobalStyle`
 
     /* A class to add padding when the screen is smaller than maxWidth */
     @media screen and (max-width: 1280px) {
-		.max-width-padding {
-            padding: 0 1rem;
+		.max-width-margin {
+            margin-inline: 1rem;
         }
 	}
 

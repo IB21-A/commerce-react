@@ -147,7 +147,7 @@ const CreateEditListing = () => {
 		);
 	} else {
 		return (
-			<Wrapper>
+			<Wrapper className="max-width-margin">
 				<h1>{listingId ? "Edit" : "Create"} Listing</h1>
 				<FormContainer>
 					<Form>
