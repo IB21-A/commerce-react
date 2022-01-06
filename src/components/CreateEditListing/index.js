@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
 
-import { useParams } from "react-router";
-
 // Styles
 import { Wrapper, FormContainer, Thumbnail } from "./CreateEditListing.styles";
 // Hooks
 import { useAuctionFetch } from "./../../hooks/useAuctionFetch";
 import { useAuth } from "../../hooks/useAuth";
+import { useParams } from "react-router";
 
 // React-Bootstrap
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-// import InputGroup from "react-bootstrap/InputGroup";
+// Components";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import BasicModal from "../common/BasicModal";
+
 import API from "../../API";
 
 const CreateEditListing = () => {
 	const { listingId } = useParams();
 	const { state, error } = useAuctionFetch(listingId);
 	const auth = useAuth();
+	const [showModal, setShowModal] = useState(false);
 	const [hasPermission, setHasPermission] = useState(false);
 	const [data, setData] = useState({
 		title: "",
@@ -69,13 +71,14 @@ const CreateEditListing = () => {
 				category: state.category,
 				start_bid: state.start_bid,
 				image_url: state.image_url,
+				is_active: state.is_active,
 			};
 			setData(newData);
 		};
 
 		const checkPermission = () => {
 			if (auth.user === null) return;
-			if (editMode && auth.user.user_id === state.creator_id) {
+			if (state.is_active && editMode && auth.user.user_id === state.creator_id) {
 				return setHasPermission(true);
 			}
 			if (!editMode && auth.user !== null) {
@@ -89,12 +92,12 @@ const CreateEditListing = () => {
 	}, [listingId, state, auth, editMode]);
 
 	const handleChange = ({ currentTarget: input }) => {
-		console.log(data);
+		// console.log(data);
 		let newData = { ...data };
 		newData[input.name] = input.value;
 		setData(newData);
-		console.log(newData);
-		console.log(newData.image_url instanceof File);
+		// console.log(newData);
+		// console.log(newData.image_url instanceof File);
 	};
 
 	const handleImageChange = (e) => {
@@ -115,10 +118,19 @@ const CreateEditListing = () => {
 
 		if (listing.status === 400) {
 			setErrors(listing.data);
-			console.log(listing.data);
-		} 
+		}
 
 		return setLoading(false);
+	};
+
+	const handleCloseAuction = async (e) => {
+		e.preventDefault();
+		setShowModal(true);
+	};
+
+	const handleConfirm = async () => {
+		console.log("Confirming Close of auction %d", state.id);
+		await API.closeListing(state.id);
 	};
 
 	if (!hasPermission) {
@@ -256,15 +268,34 @@ const CreateEditListing = () => {
 								</Form.Text>
 							)}
 						</Form.Group>
-						<Button
-							variant="primary"
-							type="submit"
-							onClick={(e) => doSubmit(e)}
-							disabled={loading}>
-							{loading ? "Please wait..." : "Submit"}
-						</Button>
+						<div className="two-columns space-between">
+							<Button
+								variant="primary"
+								type="submit"
+								onClick={(e) => doSubmit(e)}
+								disabled={loading}>
+								{loading ? "Please wait..." : "Submit"}
+							</Button>
+
+							{editMode && <Button
+								variant="warning"
+								type="submit"
+								onClick={(e) => handleCloseAuction(e)}
+								disabled={loading}>
+								{loading ? "Please wait..." : "Close Auction"}
+							</Button>}
+						</div>
 					</Form>
 				</FormContainer>
+				<BasicModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+					handleConfirm={handleConfirm}
+					title={"Are you sure you want to close this listing?"}
+					body={"This action cannot be undone."}
+					cancelButtonText={"Nevermind"}
+					confirmButtonText={"Yes, I am sure"}
+				/>
 			</Wrapper>
 		);
 	}

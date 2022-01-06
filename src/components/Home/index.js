@@ -3,20 +3,20 @@ import React, { useState, useEffect } from "react";
 
 
 // Styled Component
-import { Wrapper } from "./Home.styles";
+import { Wrapper, ListingsContainer } from "./Home.styles";
 // Bootstrap Components
 
 // Validation
 import { useAuth } from "../../hooks/useAuth";
-import { useHomeFetch } from './../../hooks/useHomeFetch';
+import { useHomeFetch } from "./../../hooks/useHomeFetch";
 
 //components
-import Spinner from '../common/Spinner';
+import Spinner from "../common/Spinner";
 import AuctionListingRow from "../AuctionListingRow";
 import SearchBar from "../SearchBar";
+import Paginator from "../common/Paginator";
 
 import API from "../../API";
-import Paginator from "../common/Paginator";
 
 const Home = () => {
 	const auth = useAuth();
@@ -34,16 +34,18 @@ const Home = () => {
 			<SearchBar setSearchTerm={setSearchTerm} />
 			{loading && <Spinner />}
 			<Wrapper>
-				{state.results.map(
-					(auction) =>
-						auction.is_active && (
-							<AuctionListingRow
-								key={auction.id}
-								auction={auction}
-								isWatched={auction.user_is_following}
-							/>
-						)
-				)}
+				<ListingsContainer>
+					{state.results.map(
+						(auction) =>
+							auction.is_active && (
+								<AuctionListingRow
+									key={auction.id}
+									auction={auction}
+									isWatched={auction.user_is_following}
+								/>
+							)
+					)}
+				</ListingsContainer>
 				<Paginator
 					totalPages={state.total_pages}
 					currentPage={pageNum}

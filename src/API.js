@@ -176,6 +176,29 @@ const apiSettings = {
 		}
 		return listing;
 	},
+	closeListing: async (listingId) => {
+		const form_data = new FormData();
+		form_data.append("is_active", false);
+
+		const listing = await axiosInstance
+			.patch(`listings/${listingId}/`, form_data, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			})
+			.then((res) => {
+				console.log(res);
+				return res;
+			})
+			.catch((error) => {
+				return error.response;
+			});
+
+		if (listing.status === 200) {
+			window.location.href = `/listings/${listing.data.id}`;
+		}
+		return listing;
+	},
 };
 
 const generateListingFormData = (data) => {

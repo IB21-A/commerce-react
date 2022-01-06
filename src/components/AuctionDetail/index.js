@@ -42,13 +42,17 @@ const AuctionDetail = () => {
 	useEffect(() => {
 		const userHasTopBid = async () => {
 			const username = await API.getCurrentUsername();
-			if (
-				state.bids[0] &&
-				state.bids[0].creator.toLowerCase() === username.toLowerCase()
-			) {
-				return setIsTopBidder(true);
+			try {
+				if (
+					state.bids[0] &&
+					state.bids[0].creator.toLowerCase() === username.toLowerCase()
+				) {
+					return setIsTopBidder(true);
+				}
+				return setIsTopBidder(false);
+			} catch (error) {
+				console.log(error);
 			}
-			return setIsTopBidder(false);
 		};
 
 		const updateBidType = async () => {
@@ -118,7 +122,7 @@ const AuctionDetail = () => {
 							<Link to={`/profile/${state.creator}`}>{state.creator}</Link>
 						</h6>
 						<div>
-							{isUsersListing && (
+							{state.is_active && isUsersListing && (
 								<Link to={`/listings/edit/${listingId}`}>
 									<Button variant="link">Edit this listing</Button>
 								</Link>
