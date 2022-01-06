@@ -160,7 +160,7 @@ const AuctionDetail = () => {
 												/>
 											</InputGroup>
 											{formError && (
-												<div className="alert alert-danger">{formError}</div>
+												<div className="alert-danger p-1">{formError}</div>
 											)}
 
 											<Form.Text className="text-muted">
