@@ -277,13 +277,15 @@ const CreateEditListing = () => {
 								{loading ? "Please wait..." : "Submit"}
 							</Button>
 
-							{editMode && <Button
-								variant="warning"
-								type="submit"
-								onClick={(e) => handleCloseAuction(e)}
-								disabled={loading}>
-								{loading ? "Please wait..." : "Close Auction"}
-							</Button>}
+							{editMode && (
+								<Button
+									variant="warning"
+									type="submit"
+									onClick={(e) => handleCloseAuction(e)}
+									disabled={loading}>
+									{loading ? "Please wait..." : "Close Auction"}
+								</Button>
+							)}
 						</div>
 					</Form>
 				</FormContainer>
@@ -292,7 +294,9 @@ const CreateEditListing = () => {
 					setShowModal={setShowModal}
 					handleConfirm={handleConfirm}
 					title={"Are you sure you want to close this listing?"}
-					body={"This action cannot be undone."}
+					body={
+						"This action cannot be undone. Clicking 'Yes' will end this auction and determine a winner."
+					}
 					cancelButtonText={"Nevermind"}
 					confirmButtonText={"Yes, I am sure"}
 				/>

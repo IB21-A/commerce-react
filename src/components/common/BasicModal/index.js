@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
+// BasicModal.defaultProps = {
+// 	title: "Are you sure?",
+// 	body: "Please confirm",
+// 	cancelButtonText: "Cancel",
+// 	confirmButtonText: "Confirm",
+// };
+
 function BasicModal({
 	showModal,
 	setShowModal,
 	handleConfirm,
-	title,
-	body,
-	cancelButtonText,
-	confirmButtonText,
+	title = "Are you sure?",
+	body = "Please confirm",
+	cancelButtonText = "Cancel",
+	confirmButtonText = "Confirm",
 }) {
 	const [show, setShow] = useState(false);
 
@@ -49,11 +56,6 @@ function BasicModal({
 	);
 }
 
-BasicModal.defaultProps = {
-	title: "Are you sure?",
-	body: "Please confirm",
-	cancelButtonText: "Cancel",
-	confirmButtonText: "Confirm",
-};
+
 
 export default BasicModal;
