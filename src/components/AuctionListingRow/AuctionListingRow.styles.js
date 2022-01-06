@@ -17,12 +17,23 @@ export const Wrapper = styled.div`
 
 export const Container = styled.div`
 	display: flex;
+	flex-wrap: wrap;
+
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+		align-items: center;
+	}
 `;
 export const ListingDetails = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-left: 1rem;
 	flex-grow: 1;
+	max-width: 60%;
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		max-width: 100%;
+	}
 `;
 
 export const Title = styled.div`
@@ -44,6 +55,10 @@ export const Thumbnail = styled.img.attrs((props) => ({
 	object-fit: contain;
 	width: 250px;
 	height: 250px;
+
+	@media screen and (max-width: 768px) {
+		margin-bottom: 1rem;
+	}
 `;
 
 Thumbnail.defaultProps = {
