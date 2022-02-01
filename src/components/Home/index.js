@@ -42,6 +42,7 @@ const Home = () => {
 									key={auction.id}
 									auction={auction}
 									isWatched={auction.user_is_following}
+									isAuthorized={auth.user}
 								/>
 							)
 					)}

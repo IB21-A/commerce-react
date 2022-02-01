@@ -15,7 +15,7 @@ import {
 	Description,
 	Price,
 } from "./AuctionListingRow.styles";
-const AuctionListing = ({ auction, isWatched }) => {
+const AuctionListing = ({ auction, isWatched,isAuthorized }) => {
 	return (
 		<Wrapper>
 			<Container>
@@ -32,6 +32,7 @@ const AuctionListing = ({ auction, isWatched }) => {
 						variant="heartContainer"
 						auctionId={auction.id}
 						isWatched={isWatched}
+						isAuthorized={isAuthorized}
 					/>
 				</ListingDetails>
 			</Container>

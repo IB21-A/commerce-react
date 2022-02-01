@@ -19,7 +19,7 @@ const WatchlistToggle = ({ auctionId, isWatched, variant, isAuthorized }) => {
 
 	const handleClick = async () => {
 		if (!isAuthorized) {
-			navigate(`/login/`);
+			return navigate(`/login/`);
 		}
 		// Send API call to update status with auctionId
 		// Get the updated status and set state

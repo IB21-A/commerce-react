@@ -29,7 +29,6 @@ const apiSettings = {
 				username: data.username,
 				password: data.password,
 			});
-
 			localStorage.setItem("access_token", res.data.access);
 			localStorage.setItem("refresh_token", res.data.refresh);
 			axiosInstance.defaults.headers["Authorization"] =
