@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const Comment = ({comment}) => {
     console.log(comment);
@@ -9,7 +10,7 @@ const Comment = ({comment}) => {
         {comment.body}
       </p>
       <p>
-          {comment.datetime}
+          {moment(comment.datetime).calendar()}
       </p>
   </div>;
 };
