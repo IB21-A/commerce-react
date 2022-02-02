@@ -23,10 +23,10 @@ import { useAuth } from "../../hooks/useAuth";
 import Spinner from "../common/Spinner";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import WatchlistToggle from "./../WatchlistToggle/Index";
+import Comments from "../Comments/";
 
 // API
 import API from "../../API";
-import Comments from "../Comments/";
 
 const AuctionDetail = () => {
 	const { listingId } = useParams();
@@ -208,7 +208,7 @@ const AuctionDetail = () => {
 				<hr />
 				<p>{state.description}</p>
 			</LowerSection>
-			<Comments />
+			<Comments comments={state.comments} />
 		</Wrapper>
 	);
 };

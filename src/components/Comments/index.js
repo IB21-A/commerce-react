@@ -5,18 +5,16 @@ import { Wrapper } from './Comments.styles';
 
 // Child components
 import CommentForm from './CommentForm';
+import Comment from './Comment';
 
-const Comments = () => {
-    const [data, setData] = useState();
-    const loading = false;
-    const errors = false;
-    
+const Comments = ({comments}) => {
+
 
   return <Wrapper>
       <h1>Comments</h1>
-      <p>Comment 1</p>
-      <p>Comment 2</p>
-      <p>Comment 3</p>
+      {comments.length > 0 && comments.map((comment) => {
+      return <Comment key={`comment-${comment.comment_id}`} comment={comment}/>
+      })}
       <CommentForm/>
   </Wrapper>
 };
