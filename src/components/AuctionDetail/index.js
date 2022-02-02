@@ -26,6 +26,7 @@ import WatchlistToggle from "./../WatchlistToggle/Index";
 
 // API
 import API from "../../API";
+import Comments from "../Comments/";
 
 const AuctionDetail = () => {
 	const { listingId } = useParams();
@@ -207,6 +208,7 @@ const AuctionDetail = () => {
 				<hr />
 				<p>{state.description}</p>
 			</LowerSection>
+			<Comments />
 		</Wrapper>
 	);
 };
