@@ -1,18 +1,23 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import moment from 'moment';
+import { Wrapper,CommentHeader,CommentBody } from './Comment.styles';
 
 const Comment = ({comment}) => {
-    console.log(comment);
-  return <div>
+  return <Wrapper>
 
-      <h3>{comment.author}</h3>
-      <p>
-        {comment.body}
-      </p>
-      <p>
-          {moment(comment.datetime).calendar()}
-      </p>
-  </div>;
+      <CommentHeader className='gap'>
+          <Link to={`/profile/${comment.author}`}>
+              <h3>{comment.author}</h3>
+          </Link> <span className='date'>{moment(comment.datetime).format('MMM Do YYYY, h:mm a')}</span>
+      </CommentHeader>
+      <CommentBody>
+          <p>
+            {comment.body}
+          </p>
+      </CommentBody>
+
+  </Wrapper>
 };
 
 export default Comment;

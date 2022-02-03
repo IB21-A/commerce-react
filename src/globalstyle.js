@@ -51,4 +51,9 @@ export const GlobalStyle = createGlobalStyle`
         gap: 1rem;
     }
 
+    .date {
+        font-style: italic;
+        font-size: .9rem;
+    }
+
 `;
