@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const HOME_URL = "http://127.0.0.1:8000/api/";
-// const HOME_URL = "http://192.168.56.1:8000/api/"; // ALE
+const HOME_URL = "https://commerce-react-thom.herokuapp.com/api/";
 
 const baseURL = HOME_URL;
 
