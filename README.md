@@ -10,18 +10,18 @@ This application was rebuild from scratch from an old version. It was previously
 
 ### What's Different?
 
--React Front-end
--Django REST API Back-end
--JWT Authentication
--Axios Instead of Fetch API
--Centralized Front-end API
--Styled Components
--Better CSS/Responsiveness
--Reusable Components
+- React Front-end
+- Django REST API Back-end
+- JWT Authentication
+- Axios Instead of Fetch API
+- Centralized Front-end API
+- Styled Components
+- Better CSS/Responsiveness
+- Reusable Components
 
 
 ### What's Coming
 
--Profile Page Build Out
--Deployment as One Unified Django/React Application
+- Profile Page Build Out
+- Deployment as One Unified Django/React Application
 
