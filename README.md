@@ -5,7 +5,9 @@ A simulated Ebay style site that allows users to register/login. create and edit
 
 ## Work in Progress
 
-This application was rebuild from scratch from an old version. It was previously built using Django template engine based front end with vanilla javascript and css. Currently the profile page is still being built out on the front end.
+This application was rebuilt from scratch from an older version. It was previously built using vanilla Django with Django's template engine for the front end with vanilla javascript and css. 
+
+Currently the profile page is still being built out on the front end.
 
 
 ### What's Different?
