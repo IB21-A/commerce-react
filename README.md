@@ -13,6 +13,8 @@ This application was rebuild from scratch from an old version. It was previously
 -React Front-end
 -Django REST API Back-end
 -JWT Authentication
+-Axios Instead of Fetch API
+-Centralized Front-end API
 -Styled Components
 -Better CSS/Responsiveness
 -Reusable Components
