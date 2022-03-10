@@ -26,7 +26,11 @@ const Profile = () => {
           <div className="datarow">
             <h2>Active Listings</h2>
             {state.listings.length > 0 ? (
-              <CardCarousel listings={state.listings} />
+              <CardCarousel
+                listings={state.listings.filter(
+                  (listing) => listing.is_active === true
+                )}
+              />
             ) : (
               <p>
                 <span className="capitalize">{userName}</span> has no listings
@@ -35,7 +39,11 @@ const Profile = () => {
           </div>
           <div className="datarow">
             <h2>Watchlist</h2>
-            <CardCarousel listings={state.watchlist} />
+            <CardCarousel
+              listings={state.watchlist.filter(
+                (listing) => listing.is_active === true
+              )}
+            />
           </div>
         </>
       )}
