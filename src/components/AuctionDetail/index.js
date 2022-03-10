@@ -100,7 +100,6 @@ const AuctionDetail = () => {
     }
 
     return window.location.reload();
-    // console.log(bid);
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -118,7 +117,9 @@ const AuctionDetail = () => {
           <div className="two-columns space-between">
             <h6>
               listed by{" "}
-              <Link to={`/profile/${state.creator}`}>{state.creator}</Link>
+              <Link to={`/profile/${state.creator}`} className="capitalize">
+                {state.creator}
+              </Link>
             </h6>
             <div>
               {state.is_active && isUsersListing && (
@@ -207,7 +208,7 @@ const AuctionDetail = () => {
         <hr />
         <p>{state.description}</p>
       </LowerSection>
-      <Comments comments={state.comments} />
+      <Comments listingId={listingId} comments={state.comments} />
     </Wrapper>
   );
 };

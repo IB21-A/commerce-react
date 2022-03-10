@@ -7,10 +7,10 @@ import { Wrapper } from "./CommentForm.styles";
 
 import API from "../../../API";
 
-const CommentForm = () => {
+const CommentForm = ({ listingId, updateComments }) => {
   const [data, setData] = useState({ comment: "" });
-  const loading = false;
-  const errors = false;
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState("");
 
   const handleChange = ({ currentTarget: input }) => {
     let newData = { ...data };
@@ -18,12 +18,17 @@ const CommentForm = () => {
     setData(newData);
   };
 
-  const doSubmit = (e) => {
+  const doSubmit = async (e) => {
     e.preventDefault();
-    if (data.comment !== "") {
-      // We need to get the ID of the listing to submit with this
-      API.submitComment(1, data.comment);
-    }
+    setErrors("");
+    setLoading(true);
+    const newComment = await API.submitComment(listingId, data.comment);
+    // if (comment.status && comment.status === 400) {
+    //   setErrors("Something went wrong, please try again later.");
+    // }
+    updateComments(newComment);
+    setLoading(false);
+    setData({ comment: "" });
   };
 
   return (

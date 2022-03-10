@@ -35,8 +35,6 @@ export const GlobalStyle = createGlobalStyle`
     .two-columns {
         display: flex;
         flex-wrap: wrap;
-        
-        
     }
 
     .space-between {
@@ -49,6 +47,10 @@ export const GlobalStyle = createGlobalStyle`
 
     .gap {
         gap: 1rem;
+    }
+
+    .capitalize {
+        text-transform: capitalize;
     }
 
     .date {

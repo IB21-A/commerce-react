@@ -98,6 +98,16 @@ const apiSettings = {
       return ex;
     }
   },
+  getCommentsByListingId: async (listingId) => {
+    // try {
+    //   let listing = await axiosInstance.get(`listings/${listingId}/`);
+
+    //   return listing.data.comments;
+    // } catch (ex) {
+    //   return ex;
+    // }
+    return;
+  },
   getWatchList: async (userId) => {
     try {
       let watchList = await axiosInstance.get(`users/${userId}/watchlist`);
@@ -132,23 +142,21 @@ const apiSettings = {
     }
     return bid;
   },
-  submitComment: async (auctionId, comment) => {
-    // const bid = await axiosInstance
-    //   .post(`bids/`, {
-    //     listing_id: auctionId,
-    //     bid_amount: bidAmount,
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response);
-    //     return error.response;
-    //   });
-    // if (bid.status === 201) {
-    //   return bid.data;
-    // }
-    // return bid;
-    console.log("submitting comment");
-    console.log({ auctionId, comment });
-    return;
+  submitComment: async (auctionId, commentBody) => {
+    const comment = await axiosInstance
+      .post(`comments/`, {
+        listing_id: auctionId,
+        body: commentBody,
+      })
+      .catch((error) => {
+        console.log(error.response);
+        return error.response;
+      });
+    if (comment.status === 201) {
+      console.log("Success!");
+      return comment.data;
+    }
+    return comment;
   },
   createListing: async (data) => {
     let form_data = generateListingFormData(data);
