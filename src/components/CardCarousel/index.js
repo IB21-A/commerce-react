@@ -30,7 +30,10 @@ const CardCarousel = ({ listings = [] }) => {
     window.addEventListener("resize", handleResize);
     handleResize();
 
-    return;
+    return function cleanup() {
+      setIsMobile(false);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (

@@ -20,6 +20,7 @@ const Profile = () => {
   const [activeListings, setActiveListings] = useState([]);
   const [closedListings, setClosedListings] = useState([]);
   const [watchedListings, setWatchedListings] = useState([]);
+  const [wonListings, setWonListings] = useState([]);
 
   useEffect(() => {
     const getIsUsersProfile = () => {
@@ -43,18 +44,14 @@ const Profile = () => {
     };
 
     const getWatchedListings = () => {
-      console.log("Get watched listings");
       if (!isUsersProfile) {
         return;
       }
 
-      console.log("Filtering Watched Listings");
-      // console.log(state.watchlist);
       const watchedListings = state.watchlist.filter(
         (listing) => listing.is_active === true
       );
-      console.log("Setting Watched Listings");
-      console.log(watchedListings);
+
       setWatchedListings(watchedListings);
     };
 
@@ -103,15 +100,13 @@ const Profile = () => {
                 )}
               />
             ) : (
-              <p>
-                <span className="capitalize">{userName}</span> has no listings
-              </p>
+              <p>{generateNoListingMessage("active")}</p>
             )}
           </div>
           {isUsersProfile && (
             <div className="datarow">
               <h2>Watchlist</h2>
-              {/* TODO If Watchlist is Empty- Show "You are not watching any active items" */}
+
               {watchedListings.length > 0 ? (
                 <CardCarousel listings={watchedListings} />
               ) : (
@@ -127,6 +122,16 @@ const Profile = () => {
               <p>{generateNoListingMessage("closed")}</p>
             )}
           </div>
+          {isUsersProfile && (
+            <div className="datarow">
+              <h2>Won Auctions</h2>
+              {watchedListings.length > 0 ? (
+                <CardCarousel listings={watchedListings} />
+              ) : (
+                <p>{generateNoListingMessage("watched")}</p>
+              )}
+            </div>
+          )}
         </>
       )}
     </Wrapper>
