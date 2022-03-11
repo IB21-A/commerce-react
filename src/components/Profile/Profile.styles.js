@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   max-width: var(--maxWidth);
-  padding: 1rem;
+  padding-inline: max(1rem, 3vw);
   margin: 0 auto;
 
   .datarow + .datarow {
