@@ -12,6 +12,7 @@ import {
   Thumbnail,
   BidContainer,
   BidBox,
+  ResultsBox,
   LowerSection,
 } from "./AuctionDetail.styles";
 
@@ -129,79 +130,88 @@ const AuctionDetail = () => {
               )}
             </div>
           </div>
-          <hr />
-          <BidBox>
-            <div>
-              {isTopBidder && (
-                <div className="bg-warning px-2 py-1 mb-3">
-                  You are the current top bidder
-                </div>
-              )}
-            </div>
-            <Form className="two-columns space-between">
-              <div className="two-columns space-between price-box">
-                <div className="m-2">{bidType}</div>
-                <div className="amount-column">
-                  <div className="bid-price">
-                    US ${state.current_bid_price.toFixed(2)}
+          {state.is_active && (
+            <BidBox>
+              <hr />
+              <div>
+                {isTopBidder && (
+                  <div className="bg-warning px-2 py-1 mb-3">
+                    You are the current top bidder
                   </div>
-                  {!isUsersListing && (
-                    <Form.Group className="mb-3" controlId="formBid">
-                      {/* <Form.Label>Bid Amount</Form.Label> */}
-                      <InputGroup>
-                        {/* <InputGroup.Text>$</InputGroup.Text> */}
-                        {/* TODO add 9 digit limit */}
-                        <Form.Control
-                          type="number"
-                          value={bidAmount}
-                          onChange={(e) => handleChange(e)}
-                          placeholder="Bid Amount"
-                          isInvalid={formError}
-                        />
-                      </InputGroup>
-                      {formError && (
-                        <div className="alert-danger p-1">{formError}</div>
-                      )}
-
-                      <Form.Text className="text-muted">
-                        Enter bid amount. e.g. $
-                        {(state.current_bid_price + 0.01).toFixed(2)}
-                      </Form.Text>
-                    </Form.Group>
-                  )}
-                </div>
-              </div>
-              <div className="button-column">
-                <div className="bid-details">
-                  {state.num_of_bids} bid
-                  {(state.num_of_bids > 1 || state.num_of_bids === 0) &&
-                    "s"}{" "}
-                  with {state.num_of_unique_bids} bidder
-                  {(state.num_of_unique_bids > 1 ||
-                    state.num_of_unique_bids === 0) &&
-                    "s"}
-                </div>
-                {!isUsersListing && (
-                  <>
-                    <Button
-                      variant="primary"
-                      className="custom-rounded mt-2"
-                      type="submit"
-                      onClick={(e) => handleSubmit(e)}
-                    >
-                      Place Bid
-                    </Button>
-                    <WatchlistToggle
-                      variant="button"
-                      auctionId={listingId}
-                      isWatched={state.user_is_following}
-                      isAuthorized={auth.user}
-                    />
-                  </>
                 )}
               </div>
-            </Form>
-          </BidBox>
+              <Form className="two-columns space-between">
+                <div className="two-columns space-between price-box">
+                  <div className="m-2">{bidType}</div>
+                  <div className="amount-column">
+                    <div className="bid-price">
+                      US ${state.current_bid_price.toFixed(2)}
+                    </div>
+                    {!isUsersListing && (
+                      <Form.Group className="mb-3" controlId="formBid">
+                        {/* <Form.Label>Bid Amount</Form.Label> */}
+                        <InputGroup>
+                          {/* <InputGroup.Text>$</InputGroup.Text> */}
+                          {/* TODO add 9 digit limit */}
+                          <Form.Control
+                            type="number"
+                            value={bidAmount}
+                            onChange={(e) => handleChange(e)}
+                            placeholder="Bid Amount"
+                            isInvalid={formError}
+                          />
+                        </InputGroup>
+                        {formError && (
+                          <div className="alert-danger p-1">{formError}</div>
+                        )}
+
+                        <Form.Text className="text-muted">
+                          Enter bid amount. e.g. $
+                          {(state.current_bid_price + 0.01).toFixed(2)}
+                        </Form.Text>
+                      </Form.Group>
+                    )}
+                  </div>
+                </div>
+                <div className="button-column">
+                  <div className="bid-details">
+                    {state.num_of_bids} bid
+                    {(state.num_of_bids > 1 || state.num_of_bids === 0) &&
+                      "s"}{" "}
+                    with {state.num_of_unique_bids} bidder
+                    {(state.num_of_unique_bids > 1 ||
+                      state.num_of_unique_bids === 0) &&
+                      "s"}
+                  </div>
+                  {!isUsersListing && (
+                    <>
+                      <Button
+                        variant="primary"
+                        className="custom-rounded mt-2"
+                        type="submit"
+                        onClick={(e) => handleSubmit(e)}
+                      >
+                        Place Bid
+                      </Button>
+                      <WatchlistToggle
+                        variant="button"
+                        auctionId={listingId}
+                        isWatched={state.user_is_following}
+                        isAuthorized={auth.user}
+                      />
+                    </>
+                  )}
+                </div>
+              </Form>
+            </BidBox>
+          )}
+          {state.is_active === false && (
+            <ResultsBox>
+              <hr />
+              This auction has ended.{" "}
+              {isTopBidder ? "You are the winner of this auction." : ""}
+            </ResultsBox>
+          )}
         </BidContainer>
       </UpperSection>
       <LowerSection className="preserve-whitespace">
