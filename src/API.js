@@ -72,8 +72,8 @@ const apiSettings = {
   getActiveAuctions: async (page, searchTerm) => {
     try {
       const endpoint = searchTerm
-        ? `listings/?page=${page}&search=${searchTerm}`
-        : `listings/?page=${page}`;
+        ? `listings/?page=${page}&is_active=True&search=${searchTerm}`
+        : `listings/?page=${page}&is_active=True`;
       let auctions = await axiosInstance.get(endpoint);
       // console.log("API.getActiveAuctions", auctions.data);
       return auctions;
