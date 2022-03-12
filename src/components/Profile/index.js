@@ -59,7 +59,6 @@ const Profile = () => {
     getActiveListings();
     getClosedListings();
     getWatchedListings();
-
     return function cleanup() {
       setIsUsersProfile(false);
       setActiveListings([]);
@@ -125,10 +124,10 @@ const Profile = () => {
           {isUsersProfile && (
             <div className="datarow">
               <h2>Won Auctions</h2>
-              {watchedListings.length > 0 ? (
-                <CardCarousel listings={watchedListings} />
+              {state.won.length > 0 ? (
+                <CardCarousel listings={state.won} />
               ) : (
-                <p>{generateNoListingMessage("watched")}</p>
+                <p>{generateNoListingMessage("won")}</p>
               )}
             </div>
           )}
