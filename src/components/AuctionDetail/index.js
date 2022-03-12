@@ -139,6 +139,11 @@ const AuctionDetail = () => {
                     You are the current top bidder
                   </div>
                 )}
+                {isUsersListing && (
+                  <div className="bg-warning px-2 py-1 mb-3">
+                    This is your listing.
+                  </div>
+                )}
               </div>
               <Form className="two-columns space-between">
                 <div className="two-columns space-between price-box">
