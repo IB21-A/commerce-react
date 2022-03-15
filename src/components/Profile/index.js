@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 // Hooks
 import { useProfileFetch } from "../../hooks/useProfileFetch";
@@ -10,6 +11,7 @@ import { Wrapper } from "./Profile.styles";
 // Components
 import CardCarousel from "../CardCarousel";
 import Spinner from "../common/Spinner";
+import { Button } from "react-bootstrap";
 
 const Profile = () => {
   const { userName } = useParams();
@@ -88,16 +90,17 @@ const Profile = () => {
       {!loading && (
         <>
           <h1 className="text-capitalize">{state.username}'s Profile</h1>
-          <p>Image can go here</p>
-          <p>We'll add some tables for auctions, watchlists, etc.</p>
+          {isUsersProfile && (
+            <div class="mb-2">
+              <Link to="../listings/create/">
+                <Button variant="primary">Create a new Listing</Button>
+              </Link>
+            </div>
+          )}
           <div className="datarow">
             <h2>Active Listings</h2>
             {state.listings.length > 0 ? (
-              <CardCarousel
-                listings={state.listings.filter(
-                  (listing) => listing.is_active === true
-                )}
-              />
+              <CardCarousel listings={activeListings} />
             ) : (
               <p>{generateNoListingMessage("active")}</p>
             )}
