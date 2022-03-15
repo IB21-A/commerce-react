@@ -6,56 +6,56 @@ import API from "../../API";
 import { HeartContainer, WatchButton } from "./WatchlistToggle.styles";
 import { Button } from "react-bootstrap";
 
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const WatchlistToggle = ({ auctionId, isWatched, variant, isAuthorized }) => {
-	const watching = isWatched;
-	const navigate = useNavigate();
-	const [isWatching, setIsWatching] = useState(false);
+  const watching = isWatched;
+  const navigate = useNavigate();
+  const [isWatching, setIsWatching] = useState(false);
 
-	useEffect(() => {
-		setIsWatching(watching);
-	}, [watching]);
+  useEffect(() => {
+    setIsWatching(watching);
+  }, [watching]);
 
-	const handleClick = async () => {
-		if (!isAuthorized) {
-			return navigate(`/login/`);
-		}
-		// Send API call to update status with auctionId
-		// Get the updated status and set state
-		let status = await API.toggleWatchStatus(auctionId);
-		if (status === true) {
-			return setIsWatching(true);
-		}
-		return setIsWatching(false);
-	};
+  const handleClick = async () => {
+    if (!isAuthorized) {
+      return navigate(`/login/`);
+    }
+    // Send API call to update status with auctionId
+    // Get the updated status and set state
+    let status = await API.toggleWatchStatus(auctionId);
+    if (status === true) {
+      return setIsWatching(true);
+    }
+    return setIsWatching(false);
+  };
 
-	const getButtonText = () => {
-		return isWatching ? "Remove from Watchlist" : "Add to Watchlist";
-	};
+  const getButtonText = () => {
+    return isWatching ? "Remove from Watchlist" : "Add to Watchlist";
+  };
 
-	if (variant === "heartContainer") {
-		return (
-			<HeartContainer onClick={handleClick}>
-				{isWatching ? <FaHeart className="active" /> : <FaRegHeart />}
-			</HeartContainer>
-		);
-	}
+  if (variant === "heartContainer") {
+    return (
+      <HeartContainer onClick={handleClick}>
+        {isWatching ? <FaHeart className="active" /> : <FaRegHeart />}
+      </HeartContainer>
+    );
+  }
 
-	if (variant === "button") {
-		return (
-			<WatchButton onClick={handleClick}>
-				<Button variant="secondary" className="custom-rounded mt-3">
-					{isWatching ? (
-						<FaStar className="icon" />
-					) : (
-						<FaRegStar className="icon" />
-					)}{" "}
-					{getButtonText()}
-				</Button>
-			</WatchButton>
-		);
-	}
+  if (variant === "button") {
+    return (
+      <WatchButton onClick={handleClick}>
+        <Button variant="secondary" className="custom-rounded mt-3">
+          {isWatching ? (
+            <FaStar className="icon" />
+          ) : (
+            <FaRegStar className="icon" />
+          )}{" "}
+          {getButtonText()}
+        </Button>
+      </WatchButton>
+    );
+  }
 };
 
 export default WatchlistToggle;

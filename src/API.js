@@ -1,5 +1,6 @@
 import axiosInstance from "./axios";
 import jwtDecode from "jwt-decode";
+import { useAuth } from "./hooks/useAuth";
 
 const apiSettings = {
   register: async (data) => {
