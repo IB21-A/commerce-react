@@ -23,26 +23,27 @@ import { createBrowserHistory } from "history";
 import { ProvideAuth } from "./hooks/useAuth";
 
 function App() {
-	const history = createBrowserHistory();
+  const history = createBrowserHistory();
 
-	return (
-		<Router history={history}>
-			<ProvideAuth>
-				<Navbar />
-				<Routes>
-					<Route path="/register" element={<Register />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/logout" element={<Logout />} />
+  return (
+    <Router history={history}>
+      <ProvideAuth>
+        <Navbar />
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
 
-					<Route path="/" element={<Home />} />
-					<Route path="/profile/:userName" element={<Profile />} />
-					<Route path="/listings/:listingId" element={<AuctionDetail />} />
-					<Route path="/listings/create" element={<CreateEditListing />} />
-					<Route
-						path="/listings/edit/:listingId"
-						element={<CreateEditListing />}
-					/>
-					{/* <Route
+          <Route path="/" element={<Home />} />
+          <Route path="/profile/:userName" element={<Profile />} />
+          <Route path="/listings/:listingId" element={<AuctionDetail />} />
+
+          <Route path="/listings/create" element={<CreateEditListing />} />
+          <Route
+            path="/listings/edit/:listingId"
+            element={<CreateEditListing />}
+          />
+          {/* <Route
 						path="/home"
 						element={
 							<RequireAuth>
@@ -50,11 +51,11 @@ function App() {
 							</RequireAuth>
 						}
 					/> */}
-				</Routes>
-			</ProvideAuth>
-			<GlobalStyle />
-		</Router>
-	);
+        </Routes>
+      </ProvideAuth>
+      <GlobalStyle />
+    </Router>
+  );
 }
 
 export default App;
