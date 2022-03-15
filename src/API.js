@@ -69,13 +69,16 @@ const apiSettings = {
       return ex;
     }
   },
-  getActiveAuctions: async (page, searchTerm) => {
+  getActiveAuctions: async (page, searchTerm, category) => {
     try {
-      const endpoint = searchTerm
-        ? `listings/?page=${page}&is_active=True&search=${searchTerm}`
-        : `listings/?page=${page}&is_active=True`;
+      let endpoint = `listings/?page=${page}&is_active=True`;
+      if (searchTerm) endpoint += `&search=${searchTerm}`;
+      if (category && category !== "0") endpoint += `&category=${category}`;
+
+      console.log(endpoint);
+
       let auctions = await axiosInstance.get(endpoint);
-      // console.log("API.getActiveAuctions", auctions.data);
+      console.log("API.getActiveAuctions", auctions.data);
       return auctions;
     } catch (ex) {
       return ex;

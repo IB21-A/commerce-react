@@ -12,39 +12,67 @@ import { Button } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const SearchBar = ({ setSearchTerm }) => {
-	const [state, setState] = useState("");
+const SearchBar = ({ setSearchTerms }) => {
+  const [state, setState] = useState({ searchTerm: "", category: "" });
+  const { categories, currentCategory, setCurrentCategory } = useHomeFetch();
 
-	const doSearch = (e) => {
-		e.preventDefault();
-		setSearchTerm(state);
-	};
+  const doSearch = (e) => {
+    e.preventDefault();
+    setSearchTerms(state);
+  };
 
-	return (
-		<Wrapper className="max-width-margin">
-			<Form onSubmit={doSearch}>
-				<Form.Group className="mb-3 " controlId="formSearchTerm">
-					<div className="two-columns gap">
-						<div className="flex-fill">
-							<Form.Control
-								type="text"
-								placeholder="Search for ..."
-								onChange={(e) => {
-									setState(e.currentTarget.value);
-								}}
-							/>
-						</div>
+  const handleChange = ({ currentTarget: input }) => {
+    let newData = { ...state };
+    newData[input.name] = input.value;
+    setState(newData);
+  };
 
-						<div>
-							<Button variant="primary" type="submit">
-								Search
-							</Button>
-						</div>
-					</div>
-				</Form.Group>
-			</Form>
-		</Wrapper>
-	);
+  return (
+    <Wrapper className="max-width-margin">
+      <Form onSubmit={doSearch}>
+        <Form.Group className="mb-3 " controlId="formSearchTerm">
+          <div className="two-columns gap">
+            <div className="flex-fill">
+              <Form.Control
+                type="text"
+                placeholder="Search for ..."
+                name="searchTerm"
+                value={state.searchTerm}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              />
+            </div>
+            <div className="">
+              <Form.Select
+                aria-label="Select a category"
+                name="category"
+                value={state.category}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              >
+                <option key="all-categories" value={0}>
+                  All Categories
+                </option>
+                {categories.map((category, index) => (
+                  <option key={index} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </div>
+
+            <div>
+              <Button variant="primary" type="submit">
+                Search
+              </Button>
+            </div>
+          </div>
+        </Form.Group>
+      </Form>
+    </Wrapper>
+  );
 };
 
 export default SearchBar;

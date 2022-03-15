@@ -19,7 +19,7 @@ import API from "../../API";
 const Home = () => {
   const auth = useAuth();
   const user = auth.user;
-  const { state, loading, error, setSearchTerm, pageNum, setPageNum } =
+  const { state, loading, error, setSearchTerms, pageNum, setPageNum } =
     useHomeFetch();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Home = () => {
 
   return (
     <>
-      <SearchBar setSearchTerm={setSearchTerm} />
+      <SearchBar setSearchTerms={setSearchTerms} />
       {loading && <Spinner />}
       <Wrapper className="max-width-margin">
         <ListingsContainer>
