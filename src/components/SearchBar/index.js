@@ -14,7 +14,7 @@ import Col from "react-bootstrap/Col";
 
 const SearchBar = ({ setSearchTerms }) => {
   const [state, setState] = useState({ searchTerm: "", category: "" });
-  const { categories, currentCategory, setCurrentCategory } = useHomeFetch();
+  const { categories } = useHomeFetch();
 
   const doSearch = (e) => {
     e.preventDefault();

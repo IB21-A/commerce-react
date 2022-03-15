@@ -16,7 +16,6 @@ const initialSearchTerms = { searchTerm: "", category: 0 };
 
 export const useHomeFetch = () => {
   const [searchTerms, setSearchTerms] = useState(initialSearchTerms);
-  const [currentCategory, setCurrentCategory] = useState(initialCategories);
   const [categories, setCategories] = useState(initialCategories);
   const [state, setState] = useState(initialState);
   const [loading, setLoading] = useState(false);
@@ -34,7 +33,6 @@ export const useHomeFetch = () => {
         searchTerms.category
       );
       setState({ ...auctions.data });
-      // console.log("useHomeFetch", auctions.data);
     } catch (error) {
       setError(true);
       console.log(error);
@@ -65,16 +63,5 @@ export const useHomeFetch = () => {
     pageNum,
     setPageNum,
     categories,
-    currentCategory,
-    setCurrentCategory,
   };
 };
-
-// useEffect(() => {
-//     const getAuctions = async () => {
-
-//         return auctions;
-//     };
-
-//     getAuctions();
-// }, []);

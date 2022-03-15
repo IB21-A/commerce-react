@@ -75,10 +75,8 @@ const apiSettings = {
       if (searchTerm) endpoint += `&search=${searchTerm}`;
       if (category && category !== "0") endpoint += `&category=${category}`;
 
-      console.log(endpoint);
-
       let auctions = await axiosInstance.get(endpoint);
-      console.log("API.getActiveAuctions", auctions.data);
+      // console.log("API.getActiveAuctions", auctions.data);
       return auctions;
     } catch (ex) {
       return ex;
