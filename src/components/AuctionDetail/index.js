@@ -223,7 +223,12 @@ const AuctionDetail = () => {
         <hr />
         <p>{state.description}</p>
       </LowerSection>
-      <Comments listingId={listingId} comments={state.comments} />
+      <Comments
+        listingId={listingId}
+        comments={state.comments}
+        listingOwnerId={state.creator_id}
+        isAuthorized={auth.user}
+      />
     </Wrapper>
   );
 };

@@ -1,12 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaCheckCircle, FaRegComment } from "react-icons/fa";
 import moment from "moment";
-import { Wrapper, CommentHeader, CommentBody } from "./Comment.styles";
+import {
+  Wrapper,
+  CommentHeader,
+  CommentBody,
+  CommentIcon,
+} from "./Comment.styles";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, isOwner }) => {
   return (
-    <Wrapper>
-      <CommentHeader className="gap">
+    <Wrapper isOwner={isOwner}>
+      <CommentHeader className="gap" style={{ "--gap": ".7rem" }}>
+        <CommentIcon isOwner={isOwner}>
+          {isOwner ? <FaCheckCircle /> : <FaRegComment />}
+        </CommentIcon>
         <Link to={`/profile/${comment.author}`}>
           <h3 className="capitalize">{comment.author}</h3>
         </Link>{" "}

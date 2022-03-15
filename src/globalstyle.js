@@ -46,7 +46,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .gap {
-        gap: 1rem;
+        gap: var(--gap,1rem);
     }
 
     .capitalize {
