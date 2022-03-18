@@ -12,6 +12,7 @@ import { Wrapper } from "./Profile.styles";
 import CardCarousel from "../CardCarousel";
 import Spinner from "../common/Spinner";
 import { Button } from "react-bootstrap";
+import { FaRegStar, FaStar } from "react-icons/fa";
 
 const Profile = () => {
   const { userName } = useParams();
@@ -22,7 +23,6 @@ const Profile = () => {
   const [activeListings, setActiveListings] = useState([]);
   const [closedListings, setClosedListings] = useState([]);
   const [watchedListings, setWatchedListings] = useState([]);
-  const [wonListings, setWonListings] = useState([]);
 
   useEffect(() => {
     const getIsUsersProfile = () => {
@@ -89,7 +89,10 @@ const Profile = () => {
       {loading && <Spinner />}
       {!loading && (
         <>
-          <h1 className="text-capitalize">{state.username}'s Profile</h1>
+          <h1 className="text-capitalize">
+            {state.username}'s Profile (<FaStar className="star" />
+            {closedListings.length})
+          </h1>
           {isUsersProfile && (
             <div class="mb-2">
               <Link to="../listings/create/">

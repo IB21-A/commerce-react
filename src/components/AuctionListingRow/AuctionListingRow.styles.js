@@ -24,6 +24,25 @@ export const Container = styled.div`
     align-items: center;
   }
 `;
+export const ThumbnailContainer = styled.div``;
+
+export const Thumbnail = styled.img.attrs((props) => ({
+  src: props.src || noImage,
+}))`
+  border: solid lightgray 1px;
+  object-fit: contain;
+  width: 250px;
+  height: 250px;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
+`;
+
+Thumbnail.defaultProps = {
+  src: noImage,
+};
+
 export const ListingDetails = styled.div`
   display: flex;
   flex-direction: column;
@@ -47,21 +66,3 @@ export const Price = styled.div`
   font-weight: 500;
 `;
 export const Description = styled.div``;
-export const ThumbnailContainer = styled.div``;
-
-export const Thumbnail = styled.img.attrs((props) => ({
-  src: props.src || noImage,
-}))`
-  border: solid lightgray 1px;
-  object-fit: contain;
-  width: 250px;
-  height: 250px;
-
-  @media screen and (max-width: 768px) {
-    margin-bottom: 1rem;
-  }
-`;
-
-Thumbnail.defaultProps = {
-  src: noImage,
-};
