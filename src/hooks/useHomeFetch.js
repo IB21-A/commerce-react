@@ -50,6 +50,12 @@ export const useHomeFetch = () => {
     fetchAuctions(pageNum, searchTerms);
   }, [pageNum, searchTerms]);
 
+  // @Used to submit a new search and reset the page # to 1
+  const doNewSearch = (searchTerms) => {
+    setPageNum(1);
+    setSearchTerms(searchTerms);
+  };
+
   // We only need to fetch categories once, they dont update
   useEffect(() => {
     getCategories();
@@ -59,7 +65,7 @@ export const useHomeFetch = () => {
     state,
     loading,
     error,
-    setSearchTerms,
+    doNewSearch,
     pageNum,
     setPageNum,
     categories,

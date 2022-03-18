@@ -12,13 +12,13 @@ import { Button } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const SearchBar = ({ setSearchTerms }) => {
+const SearchBar = ({ doNewSearch }) => {
   const [state, setState] = useState({ searchTerm: "", category: "" });
   const { categories } = useHomeFetch();
 
   const doSearch = (e) => {
     e.preventDefault();
-    setSearchTerms(state);
+    doNewSearch(state);
   };
 
   const handleChange = ({ currentTarget: input }) => {
