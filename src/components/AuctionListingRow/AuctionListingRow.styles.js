@@ -17,11 +17,12 @@ export const Wrapper = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
   }
 `;
 export const ThumbnailContainer = styled.div``;
@@ -65,4 +66,8 @@ export const Price = styled.div`
   font-size: 1.8rem;
   font-weight: 500;
 `;
-export const Description = styled.div``;
+export const Description = styled.div`
+  @media screen and (min-width: 769px) {
+    margin-right: clamp(10vw, 1em, 20vw);
+  }
+`;
