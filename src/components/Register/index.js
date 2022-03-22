@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 import API from "../../API";
-// Custom Hook
-import { useAuth } from "../../hooks/useAuth";
 
 // Styled Component
 import { FormContainer, Wrapper } from "./Register.styles";
@@ -24,7 +22,6 @@ const Register = () => {
     password_repeat: "",
   });
   const [errors, setErrors] = useState({});
-  const auth = useAuth();
 
   const schema = Joi.object({
     email: Joi.string().email({
@@ -59,32 +56,20 @@ const Register = () => {
         newErrors[item.path] = item.message;
       });
       setErrors(newErrors);
-      return false;
-    }
-
-    return true;
-  };
-
-  const attemptRegister = async () => {
-    let newErrors = {};
-    const result = await API.register(data);
-    if (result.status === 201) {
-      await auth.login(data);
       return;
     }
-
-    console.log(result);
-    newErrors = result;
-    setErrors(newErrors);
-    return;
+    try {
+      const result = await API.register(data);
+      newErrors = result;
+      setErrors(newErrors);
+    } catch (e) {
+      console.log("try/catch block error:", e);
+    }
   };
 
   const doSubmit = async (e) => {
     e.preventDefault();
-    const validated = await validate();
-    if (!validated) return;
-
-    await attemptRegister();
+    await validate();
   };
 
   return (

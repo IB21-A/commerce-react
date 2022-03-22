@@ -6,7 +6,7 @@ const apiSettings = {
   register: async (data) => {
     const res = await axiosInstance
       .post(`/users/register/`, {
-        email: data.email,
+        // email: data.email,
         username: data.username,
         first_name: data.first_name,
         last_name: data.last_name,
@@ -38,7 +38,9 @@ const apiSettings = {
       return user;
     } catch (ex) {
       if (ex.response) {
-        return ex.response;
+        console.log("fail");
+        console.log(ex.response.data);
+        return ex.response.data;
       }
     }
   },
