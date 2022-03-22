@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import API from "../../API";
 
 // Styles
 import { Wrapper, CommentSpace } from "./Comments.styles";
-// Components
-import Spinner from "../common/Spinner";
+
 // Child components
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";

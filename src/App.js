@@ -11,9 +11,6 @@ import AuctionDetail from "./components/AuctionDetail/index";
 import CreateEditListing from "./components/CreateEditListing/";
 import Profile from "./components/Profile";
 
-// Custome Route component
-import RequireAuth from "./components/common/RequireAuth";
-
 // Styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import { GlobalStyle } from "./globalstyle";

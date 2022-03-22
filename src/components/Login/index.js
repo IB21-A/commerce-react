@@ -1,9 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import API from "../../API";
-
-import Spinner from "../common/Spinner";
 
 // Styled Component
 import { FormContainer, Wrapper } from "./Login.styles";
@@ -43,10 +39,10 @@ const Login = () => {
     setErrors({});
 
     const options = { abortEarly: false };
-    const validated = schema.validate(data, options);
+    const validated = await schema.validate(data, options);
     let newErrors = {};
     if (validated.error) {
-      validated.error.details.map((item) => {
+      validated.error.details.forEach((item) => {
         newErrors[item.path] = item.message;
       });
       setErrors(newErrors);
@@ -80,6 +76,10 @@ const Login = () => {
     e.preventDefault();
     await validate();
     const loggedIn = await attemptLogin();
+    if (Object.entries(errors).length !== 0) {
+      console.log(Object.entries(errors).length);
+      return;
+    }
     if (loggedIn) {
       navigate("/");
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 // Styled Component
 import { Wrapper, ListingsContainer } from "./Home.styles";
@@ -14,11 +14,8 @@ import AuctionListingRow from "../AuctionListingRow";
 import SearchBar from "../SearchBar";
 import Paginator from "../common/Paginator";
 
-import API from "../../API";
-
 const Home = () => {
   const auth = useAuth();
-  const user = auth.user;
   const { state, loading, error, doNewSearch, pageNum, setPageNum } =
     useHomeFetch();
 

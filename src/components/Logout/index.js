@@ -6,16 +6,16 @@ import { Wrapper } from "./Logout.styles";
 import { useAuth } from "../../hooks/useAuth";
 
 const Logout = () => {
-	const auth = useAuth();
-	useEffect(() => {
-		auth.logout();
-	}, []);
+  const auth = useAuth();
+  useEffect(() => {
+    auth.logout();
+  });
 
-	return (
-		<Wrapper>
-			<div>Logging out...</div>
-		</Wrapper>
-	);
+  return (
+    <Wrapper>
+      <div>Logging out...</div>
+    </Wrapper>
+  );
 };
 
 export default Logout;

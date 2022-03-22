@@ -12,7 +12,7 @@ import { Wrapper } from "./Profile.styles";
 import CardCarousel from "../CardCarousel";
 import Spinner from "../common/Spinner";
 import { Button } from "react-bootstrap";
-import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
 const Profile = () => {
   const { userName } = useParams();
@@ -67,7 +67,7 @@ const Profile = () => {
       setClosedListings([]);
       setWatchedListings([]);
     };
-  }, [state, user]);
+  }, [state, user, userName, isUsersProfile]);
 
   // @listingType is a string ("Active, Watched, Closed")
   const generateNoListingMessage = (type) => {

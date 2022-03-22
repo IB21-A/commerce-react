@@ -1,4 +1,4 @@
-import { Redirect, Route, useLocation, Navigate } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 function RequireAuth({ children }) {

@@ -7,10 +7,8 @@ import { Wrapper } from "./SearchBar.styles";
 import { useHomeFetch } from "../../hooks/useHomeFetch";
 
 // Bootstrap
-import { Container, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 const SearchBar = ({ doNewSearch }) => {
   const [state, setState] = useState({ searchTerm: "", category: "" });
