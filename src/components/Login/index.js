@@ -46,10 +46,10 @@ const Login = () => {
         newErrors[item.path] = item.message;
       });
       setErrors(newErrors);
-      return;
+      return false;
     }
 
-    return;
+    return true;
   };
 
   const attemptLogin = async () => {
@@ -74,7 +74,11 @@ const Login = () => {
 
   const doSubmit = async (e) => {
     e.preventDefault();
-    await validate();
+    const validated = await validate();
+    if (!validated) {
+      return;
+    }
+
     const loggedIn = await attemptLogin();
     if (Object.entries(errors).length !== 0) {
       console.log(Object.entries(errors).length);

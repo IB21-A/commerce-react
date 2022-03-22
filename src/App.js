@@ -40,14 +40,6 @@ function App() {
             path="/listings/edit/:listingId"
             element={<CreateEditListing />}
           />
-          {/* <Route
-						path="/home"
-						element={
-							<RequireAuth>
-								<Home />
-							</RequireAuth>
-						}
-					/> */}
         </Routes>
       </ProvideAuth>
       <GlobalStyle />

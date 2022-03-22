@@ -38,6 +38,8 @@ const apiSettings = {
       return user;
     } catch (ex) {
       if (ex.response) {
+        console.log("fail");
+        console.log(ex.response.data);
         return ex.response.data;
       }
     }
