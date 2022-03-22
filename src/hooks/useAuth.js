@@ -27,10 +27,17 @@ export function useProvideAuth() {
 
   // provide data.username and data.password
   const login = async (data) => {
-    const user = await API.login(data);
+    try {
+      const response = await API.login(data);
+      if (response.status === 401) {
+        return response.data;
+      }
 
-    setUser(user);
-    return user;
+      setUser(response.data);
+      navigate("/");
+    } catch (error) {
+      return error;
+    }
   };
 
   const logout = async () => {
