@@ -58,18 +58,26 @@ const Register = () => {
       setErrors(newErrors);
       return;
     }
+    return true;
+  };
+
+  const attemptRegister = async () => {
     try {
       const result = await API.register(data);
-      newErrors = result;
+      console.log(result);
+      let newErrors = result;
       setErrors(newErrors);
     } catch (e) {
       console.log("try/catch block error:", e);
     }
   };
-
   const doSubmit = async (e) => {
     e.preventDefault();
-    await validate();
+    const validated = await validate();
+    if (!validated) {
+      return;
+    }
+    await attemptRegister();
   };
 
   return (
