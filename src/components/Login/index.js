@@ -10,6 +10,7 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 // Validation
 import Joi from "joi";
+// Custom Hook
 import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
@@ -64,7 +65,7 @@ const Login = () => {
       }
       setLoading(false);
       if (user.username) {
-        return true;
+        return navigate("/");
       }
     } catch (e) {
       setLoading(false);
@@ -74,19 +75,14 @@ const Login = () => {
 
   const doSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const validated = await validate();
     if (!validated) {
       return;
     }
 
-    const loggedIn = await attemptLogin();
-    if (Object.entries(errors).length !== 0) {
-      console.log(Object.entries(errors).length);
-      return;
-    }
-    if (loggedIn) {
-      navigate("/");
-    }
+    await attemptLogin();
+    setLoading(false);
   };
 
   return (
