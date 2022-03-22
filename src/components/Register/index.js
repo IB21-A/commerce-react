@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import API from "../../API";
 
@@ -11,17 +12,20 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 // Validation
 import Joi from "joi";
+import { useAuth } from "../../hooks/useAuth";
 
 const Register = () => {
   const [data, setData] = useState({
     email: "",
     username: "",
-    first_name: "Test",
-    last_name: "Test",
+    first_name: "firstname",
+    last_name: "lastname",
     password: "",
     password_repeat: "",
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+  const auth = useAuth();
 
   const schema = Joi.object({
     email: Joi.string().email({
@@ -58,18 +62,52 @@ const Register = () => {
       setErrors(newErrors);
       return;
     }
+    return true;
+  };
+
+  const attemptRegister = async () => {
     try {
       const result = await API.register(data);
-      newErrors = result;
+
+      if (result.status === 201) {
+        return true;
+      }
+      let newErrors = result;
       setErrors(newErrors);
+      return false;
     } catch (e) {
-      console.log("try/catch block error:", e);
+      return false;
+    }
+  };
+  const doSubmit = async (e) => {
+    e.preventDefault();
+    const validated = await validate();
+    if (!validated) {
+      return;
+    }
+    const registered = await attemptRegister();
+
+    if (registered) {
+      attemptLogin();
     }
   };
 
-  const doSubmit = async (e) => {
-    e.preventDefault();
-    await validate();
+  const attemptLogin = async () => {
+    try {
+      const user = await auth.login(data);
+
+      let newErrors = {};
+
+      if (user.detail) {
+        newErrors.login_error = user.detail;
+        setErrors(newErrors);
+      }
+
+      if (user.username) {
+        return navigate("/");
+      }
+    } catch (e) {}
+    return false;
   };
 
   return (
@@ -148,6 +186,9 @@ const Register = () => {
               </FloatingLabel>
               {errors.password && (
                 <div className="alert alert-danger">{errors.password}</div>
+              )}
+              {errors.login_error && (
+                <div className="alert alert-danger">{errors.login_error}</div>
               )}
             </Form.Group>
 
