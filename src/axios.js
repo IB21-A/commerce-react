@@ -21,8 +21,9 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async function (error) {
-    const originalRequest = error.config;
-
+    let originalRequest = error.config;
+    console.log(error.response);
+    console.log(originalRequest.url);
     if (typeof error.response === "undefined") {
       alert(
         "A server/network error occurred. " +
@@ -34,7 +35,7 @@ axiosInstance.interceptors.response.use(
 
     if (
       error.response.status === 401 &&
-      originalRequest.url === baseURL + "users/token/refresh/"
+      originalRequest.url === "/users/token/refresh/"
     ) {
       window.location.href = "/login/";
       return Promise.reject(error);
@@ -54,10 +55,11 @@ axiosInstance.interceptors.response.use(
         const now = Math.ceil(Date.now() / 1000);
 
         if (tokenParts.exp > now) {
-          return axiosInstance
+          console.log("attempting refresh of access token");
+          return await axiosInstance
             .post("/users/token/refresh/", { refresh: refreshToken })
             .then((response) => {
-              console.log(response);
+              console(response);
               localStorage.setItem("access_token", response.data.access);
               localStorage.setItem("refresh_token", response.data.refresh);
 
@@ -65,27 +67,33 @@ axiosInstance.interceptors.response.use(
 
               axiosInstance.defaults.headers["Authorization"] =
                 newAuthorizationHeader;
-              originalRequest.defaults.headers["Authorization"] =
-                newAuthorizationHeader;
-              console.log(originalRequest);
+              originalRequest.headers["Authorization"] = newAuthorizationHeader;
 
               return axiosInstance(originalRequest);
             })
             .catch((err) => {
+              // Abort if refresh token is invalid
               console.log(err);
+              removeTokensAndLogOut();
             });
         } else {
           console.log("Refresh token is expired", tokenParts.exp, now);
-          window.location.href = "/login/";
+          removeTokensAndLogOut();
         }
       } else {
         console.log("Refresh token not available.");
-        window.location.href = "/login/";
+        removeTokensAndLogOut();
       }
     }
 
     return Promise.reject(error);
   }
 );
+
+const removeTokensAndLogOut = () => {
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
+  window.location.href = "/login/";
+};
 
 export default axiosInstance;
