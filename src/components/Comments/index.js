@@ -17,7 +17,6 @@ const Comments = ({
   const [comments, setComments] = useState(commentData);
 
   const updateComments = async (newComment) => {
-    console.log(comments);
     const newComments = [...comments, newComment];
     setComments(newComments);
   };

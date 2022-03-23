@@ -43,7 +43,6 @@ export const useAuctionFetch = (listingId) => {
       setState(auction.data);
     } catch (error) {
       setError(true);
-      // console.log("UseAuctionFetch Error", error);
     }
     setLoading(false);
   };

@@ -19,11 +19,6 @@ const Home = () => {
   const { state, loading, error, doNewSearch, pageNum, setPageNum } =
     useHomeFetch();
 
-  useEffect(() => {
-    // console.log("home");
-    // console.log(state);
-  }, [state]);
-
   return (
     <>
       <SearchBar doNewSearch={doNewSearch} />
