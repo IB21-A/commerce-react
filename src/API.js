@@ -1,6 +1,5 @@
 import axiosInstance from "./axios";
 import jwtDecode from "jwt-decode";
-import { useAuth } from "./hooks/useAuth";
 
 const apiSettings = {
   register: async (data) => {
@@ -68,7 +67,7 @@ const apiSettings = {
       let categories = await axiosInstance.get(`categories/`);
       return categories.data;
     } catch (ex) {
-      return ex;
+      return [];
     }
   },
   getActiveAuctions: async (page, searchTerm, category) => {
@@ -114,7 +113,6 @@ const apiSettings = {
   getWatchList: async (userId) => {
     try {
       let watchList = await axiosInstance.get(`users/${userId}/watchlist`);
-      let array = Object.values(watchList.data);
       return Object.values(watchList.data);
     } catch (ex) {
       return ex;

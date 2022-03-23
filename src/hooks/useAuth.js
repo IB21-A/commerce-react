@@ -62,7 +62,6 @@ export function useProvideAuth() {
     const checkUser = async () => {
       try {
         let token = await localStorage.getItem("access_token");
-        console.log("useAuth useEffect checkUser", token);
         setUser(jwtDecode(token));
       } catch (ex) {
         setUser(null);
