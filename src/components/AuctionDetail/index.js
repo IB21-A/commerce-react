@@ -94,7 +94,7 @@ const AuctionDetail = () => {
     }
     setFormError("");
     const bid = await API.submitBid(listingId, bidAmount);
-    // console.log(bid.data.bid_amount);
+
     if (bid.status === 400) {
       setFormError(bid.data.bid_amount);
       return;

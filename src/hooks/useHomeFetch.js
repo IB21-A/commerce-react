@@ -23,7 +23,6 @@ export const useHomeFetch = () => {
   const [pageNum, setPageNum] = useState(1);
 
   const fetchAuctions = async (pageNum, searchTerms) => {
-    console.log(searchTerms);
     try {
       setError(false);
       setLoading(true);
@@ -35,14 +34,13 @@ export const useHomeFetch = () => {
       setState({ ...auctions.data });
     } catch (error) {
       setError(true);
-      console.log(error);
     }
     setLoading(false);
   };
 
   const getCategories = async () => {
     const data = await API.getCategories();
-    setCategories(data);
+    if (data && data.length > 1) setCategories(data);
   };
 
   useEffect(() => {

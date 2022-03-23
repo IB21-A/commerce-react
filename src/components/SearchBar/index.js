@@ -53,11 +53,12 @@ const SearchBar = ({ doNewSearch }) => {
                 <option key="all-categories" value={0}>
                   All Categories
                 </option>
-                {categories.map((category, index) => (
-                  <option key={index} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
+                {categories &&
+                  categories.map((category, index) => (
+                    <option key={index} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
               </Form.Select>
             </div>
 

@@ -51,6 +51,7 @@ export function useProvideAuth() {
     const unsubscribe = () => {
       try {
         let token = localStorage.getItem("access_token");
+        console.log("useAuth useEffect unsubscribe", token);
         setUser(jwtDecode(token));
       } catch (ex) {
         setUser(null);
@@ -61,6 +62,7 @@ export function useProvideAuth() {
     const checkUser = async () => {
       try {
         let token = await localStorage.getItem("access_token");
+        console.log("useAuth useEffect checkUser", token);
         setUser(jwtDecode(token));
       } catch (ex) {
         setUser(null);
