@@ -14,6 +14,8 @@ import AuctionListingRow from "../AuctionListingRow";
 import SearchBar from "../SearchBar";
 import Paginator from "../common/Paginator";
 
+import ThomCodesModal from "../ThomCodesModal";
+
 const Home = () => {
   const auth = useAuth();
   const { state, loading, error, doNewSearch, pageNum, setPageNum } =
@@ -21,6 +23,7 @@ const Home = () => {
 
   return (
     <>
+      <ThomCodesModal />
       <SearchBar doNewSearch={doNewSearch} />
       {loading && <Spinner />}
       <Wrapper className="max-width-margin">
