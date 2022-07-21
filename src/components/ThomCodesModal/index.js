@@ -33,7 +33,7 @@ const ThomCodesModal = () => {
           <Modal.Title>Welcome Recruiter or Hiring Manager!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>I see you're visiting via link from my portolio site! </p>
+          <p>I see you're visiting via link from my portfolio site! </p>
           <p>
             Feel free to create an account by visiting the register link (You
             can make up an email address, as long as it ends in
